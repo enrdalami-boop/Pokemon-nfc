@@ -3,20 +3,122 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta http-equiv="refresh"
-          content="0; url=https://www.fandejuegos.com/game.php?id_juego=18125&id_dominio=1&code=vcvv6d1192d8vvvvv8dc8892vvdc2d2v">
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
 
-    <title>Pokémon Amarillo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>Mi juego</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        #game {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
-<p>Abriendo Pokémon Amarillo...</p>
+<div id="game"></div>
 
 <script>
-window.location.href =
-"https://www.fandejuegos.com/game.php?id_juego=18125&id_dominio=1&code=vcvv6d1192d8vvvvv8dc8892vvdc2d2v";
+
+    /* DÓNDE SE MUESTRA EL EMULADOR */
+    window.EJS_player = "#game";
+
+
+    /* GAME BOY */
+    window.EJS_core = "gb";
+
+
+    /* NOMBRE FIJO.
+       IMPORTANTE PARA IDENTIFICAR SIEMPRE LA MISMA PARTIDA */
+    window.EJS_gameName = "mi-juego";
+
+
+    /* ID FIJO Y ÚNICO DEL JUEGO */
+    window.EJS_gameID = 1001;
+
+
+    /*
+       ROM DEL JUEGO.
+       Sustituiremos este archivo por una ROM
+       que tengas derecho a distribuir.
+    */
+    window.EJS_gameUrl = "./roms/juego.gb";
+
+
+    /*
+       EMULATORJS ESTABLE.
+       No necesitamos subir todo el emulador a GitHub.
+    */
+    window.EJS_pathtodata =
+        "https://cdn.emulatorjs.org/stable/data/";
+
+
+    /* ARRANCAR AUTOMÁTICAMENTE */
+    window.EJS_startOnLoaded = true;
+
+
+    /*
+       MUY IMPORTANTE:
+       fuerza a actualizar el archivo de guardado
+       cada 7 segundos.
+    */
+    window.EJS_fixedSaveInterval = 7000;
+
+
+    /*
+       Guardar save states en el navegador.
+    */
+    window.EJS_defaultOptions = {
+        "save-state-location": "browser"
+    };
+
+
+    /*
+       Dejamos disponibles los botones para
+       EXPORTAR e IMPORTAR la partida.
+    */
+    window.EJS_Buttons = {
+
+        saveSavFiles: {
+            visible: true
+        },
+
+        loadSavFiles: {
+            visible: true
+        },
+
+        saveState: {
+            visible: true
+        },
+
+        loadState: {
+            visible: true
+        },
+
+        fullscreen: {
+            visible: true
+        }
+    };
+
 </script>
+
+<script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 
 </body>
 </html>
