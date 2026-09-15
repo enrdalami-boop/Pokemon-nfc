@@ -11,7 +11,12 @@
 
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <title>Mi juego</title>
+    <title>Pokémon Amarillo</title>
+
+    <!-- Precargamos la ROM para evitar el problema de la primera apertura -->
+    <link rel="preload"
+          href="./roms/juego.gb"
+          as="fetch">
 
     <style>
         html, body {
@@ -21,11 +26,38 @@
             height: 100%;
             background: #000;
             overflow: hidden;
+            font-family: Arial, sans-serif;
         }
 
         #game {
             width: 100%;
             height: 100%;
+        }
+
+        #inicio {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #iniciar {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 30px;
+            border: 0;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        #estado {
+            margin-top: 18px;
+            color: white;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -34,66 +66,52 @@
 
 <div id="game"></div>
 
+<div id="inicio">
+    <button id="iniciar">INICIAR JUEGO</button>
+    <div id="estado"></div>
+</div>
+
 <script>
 
-    /* DÓNDE SE MUESTRA EL EMULADOR */
+    /*
+       CONFIGURACIÓN DEL JUEGO
+    */
+
     window.EJS_player = "#game";
 
-
-    /* GAME BOY */
     window.EJS_core = "gb";
 
-
-    /* NOMBRE FIJO.
-       IMPORTANTE PARA IDENTIFICAR SIEMPRE LA MISMA PARTIDA */
     window.EJS_gameName = "mi-juego";
 
-
-    /* ID FIJO Y ÚNICO DEL JUEGO */
+    /*
+       NO CAMBIAR ESTE ID.
+       Mantenerlo permite conservar los mismos guardados.
+    */
     window.EJS_gameID = 1001;
 
-
     /*
-       ROM DEL JUEGO.
-       Sustituiremos este archivo por una ROM
-       que tengas derecho a distribuir.
+       Creamos una dirección absoluta a la ROM.
     */
-    window.EJS_gameUrl = "./roms/juego.gb";
+    window.EJS_gameUrl =
+        new URL("./roms/juego.gb", window.location.href).href;
 
-
-    /*
-       EMULATORJS ESTABLE.
-       No necesitamos subir todo el emulador a GitHub.
-    */
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
-
-    /* ARRANCAR AUTOMÁTICAMENTE */
-    window.EJS_startOnLoaded = false;
-    window.EJS_startButtonName = "INICIAR JUEGO";
-
+    /*
+       Después del toque del usuario podemos iniciar automáticamente.
+    */
+    window.EJS_startOnLoaded = true;
 
     /*
-       MUY IMPORTANTE:
-       fuerza a actualizar el archivo de guardado
-       cada 7 segundos.
+       Guardar periódicamente.
     */
     window.EJS_fixedSaveInterval = 7000;
 
-
-    /*
-       Guardar save states en el navegador.
-    */
     window.EJS_defaultOptions = {
         "save-state-location": "browser"
     };
 
-
-    /*
-       Dejamos disponibles los botones para
-       EXPORTAR e IMPORTAR la partida.
-    */
     window.EJS_Buttons = {
 
         saveSavFiles: {
@@ -117,9 +135,52 @@
         }
     };
 
-</script>
 
-<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
+    /*
+       BOTÓN DE INICIO
+    */
+
+    const boton = document.getElementById("iniciar");
+    const estado = document.getElementById("estado");
+    const pantallaInicio = document.getElementById("inicio");
+
+    boton.addEventListener("click", function () {
+
+        /*
+           Impedimos pulsarlo dos veces.
+        */
+        boton.disabled = true;
+        boton.textContent = "CARGANDO...";
+        estado.textContent = "Preparando el juego...";
+
+        /*
+           Solo AHORA cargamos EmulatorJS.
+        */
+        const script = document.createElement("script");
+
+        script.src =
+            "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
+
+        script.onload = function () {
+
+            /*
+               Quitamos nuestra pantalla de inicio.
+            */
+            pantallaInicio.style.display = "none";
+        };
+
+        script.onerror = function () {
+
+            boton.disabled = false;
+            boton.textContent = "REINTENTAR";
+            estado.textContent =
+                "No se pudo cargar el emulador. Comprueba la conexión.";
+        };
+
+        document.body.appendChild(script);
+    });
+
+</script>
 
 </body>
 </html>
