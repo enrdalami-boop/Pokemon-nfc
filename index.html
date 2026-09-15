@@ -1,180 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#111827" />
-  <title>Pokémon NFC Player</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100svh;
-      background: radial-gradient(circle at top, #263b68 0%, #111827 42%, #080c14 100%);
-      color: white;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-    }
-    .shell {
-      width: min(100%, 900px);
-      background: rgba(17, 24, 39, .88);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.35);
-      backdrop-filter: blur(12px);
-    }
-    h1 { margin: 0 0 8px; font-size: clamp(1.7rem, 6vw, 3rem); }
-    p { color: #cbd5e1; line-height: 1.55; }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      margin: 20px 0;
-    }
-    label.button, button {
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
-      padding: 13px 18px;
-      font-weight: 750;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    label.button {
-      background: #facc15;
-      color: #111827;
-    }
-    button {
-      background: #334155;
-      color: white;
-    }
-    input[type="file"] { display: none; }
-    select {
-      background: #0f172a;
-      color: white;
-      border: 1px solid #475569;
-      border-radius: 12px;
-      padding: 11px 12px;
-      font-size: 1rem;
-    }
-    #status {
-      min-height: 1.6em;
-      color: #93c5fd;
-      font-weight: 650;
-    }
-    #game-wrap {
-      width: 100%;
-      min-height: 360px;
-      display: none;
-      overflow: hidden;
-      border-radius: 18px;
-      background: black;
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    #game { width: 100%; min-height: 360px; }
-    .note {
-      margin-top: 18px;
-      font-size: .9rem;
-      color: #94a3b8;
-    }
-  </style>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="refresh"
+          content="0; url=https://www.fandejuegos.com/game.php?id_juego=18125&id_dominio=1&code=vcvv6d1192d8vvvvv8dc8892vvdc2d2v">
+
+    <title>Pokémon Amarillo</title>
 </head>
+
 <body>
-  <main class="shell">
-    <h1>Pokémon NFC Player</h1>
-    <p>
-      Acerca tu móvil a la etiqueta NFC para abrir esta página. Después selecciona una copia
-      de juego que tengas derecho a utilizar (.gb, .gbc o .gba).
-    </p>
 
-    <div class="controls">
-      <label class="button" for="romFile">Elegir ROM</label>
-      <input id="romFile" type="file" accept=".gb,.gbc,.gba,application/octet-stream" />
+<p>Abriendo Pokémon Amarillo...</p>
 
-      <select id="system" aria-label="Sistema">
-        <option value="auto">Detectar automáticamente</option>
-        <option value="gb">Game Boy / Game Boy Color</option>
-        <option value="gba">Game Boy Advance</option>
-      </select>
+<script>
+window.location.href =
+"https://www.fandejuegos.com/game.php?id_juego=18125&id_dominio=1&code=vcvv6d1192d8vvvvv8dc8892vvdc2d2v";
+</script>
 
-      <button id="reload" type="button">Reiniciar</button>
-    </div>
-
-    <div id="status">Esperando un juego…</div>
-
-    <section id="game-wrap">
-      <div id="game"></div>
-    </section>
-
-    <p class="note">
-      La ROM se carga desde tu dispositivo mediante una URL local temporal (blob:).
-      Este repositorio no incluye ni publica archivos de juegos comerciales.
-    </p>
-  </main>
-
-  <script>
-    const romInput = document.getElementById("romFile");
-    const systemSelect = document.getElementById("system");
-    const statusEl = document.getElementById("status");
-    const gameWrap = document.getElementById("game-wrap");
-    const reloadBtn = document.getElementById("reload");
-
-    function detectCore(filename) {
-      const chosen = systemSelect.value;
-      if (chosen !== "auto") return chosen;
-
-      const ext = filename.toLowerCase().split(".").pop();
-      if (ext === "gba") return "gba";
-      if (ext === "gb" || ext === "gbc") return "gb";
-      throw new Error("Formato no reconocido. Usa .gb, .gbc o .gba.");
-    }
-
-    function loadEmulator(file) {
-      const core = detectCore(file.name);
-      const romUrl = URL.createObjectURL(file);
-
-      // Variables globales que EmulatorJS lee al arrancar.
-      window.EJS_player = "#game";
-      window.EJS_core = core;
-      window.EJS_gameUrl = romUrl;
-      window.EJS_gameName = file.name.replace(/\.[^.]+$/, "");
-      window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-      window.EJS_startOnLoaded = true;
-      window.EJS_language = "es-ES";
-
-      statusEl.textContent = `Cargando ${file.name}…`;
-      gameWrap.style.display = "block";
-
-      const script = document.createElement("script");
-      script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
-      script.onload = () => {
-        statusEl.textContent = `Emulador iniciado (${core === "gba" ? "Game Boy Advance" : "Game Boy / Color"}).`;
-      };
-      script.onerror = () => {
-        statusEl.textContent = "No se pudo cargar EmulatorJS. Comprueba tu conexión.";
-      };
-      document.body.appendChild(script);
-    }
-
-    romInput.addEventListener("change", () => {
-      const file = romInput.files?.[0];
-      if (!file) return;
-
-      try {
-        loadEmulator(file);
-      } catch (err) {
-        statusEl.textContent = err.message;
-      }
-    });
-
-    reloadBtn.addEventListener("click", () => location.reload());
-  </script>
 </body>
 </html>
