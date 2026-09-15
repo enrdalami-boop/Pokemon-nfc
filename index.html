@@ -13,12 +13,12 @@
 
     <title>Pokémon Amarillo</title>
 
-    <!-- Precargamos la ROM para evitar el problema de la primera apertura -->
     <link rel="preload"
           href="./roms/juego.gb"
           as="fetch">
 
     <style>
+
         html, body {
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
             height: 100%;
             background: #000;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         #game {
@@ -38,79 +38,212 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: #000;
+
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #333 0%,
+                    #111 55%,
+                    #000 100%
+                );
+
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #titulo {
+            color: #ffdc00;
+            font-size: 36px;
+            font-weight: 900;
+            margin: 0 0 8px 0;
+            letter-spacing: 2px;
+            text-shadow:
+                2px 2px 0 #1d4fa3,
+                4px 4px 8px rgba(0,0,0,0.8);
+        }
+
+        #subtitulo {
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+            opacity: 0.9;
         }
 
         #iniciar {
+            background: #ffdc00;
+            color: #111;
+
+            border: none;
+            border-radius: 14px;
+
+            padding: 18px 34px;
+
             font-size: 20px;
-            font-weight: bold;
-            padding: 18px 30px;
-            border: 0;
-            border-radius: 12px;
+            font-weight: 900;
+
             cursor: pointer;
+
+            box-shadow:
+                0 6px 0 #c9a900,
+                0 10px 20px rgba(0,0,0,0.45);
+
+            transition:
+                transform 0.1s ease,
+                box-shadow 0.1s ease;
+        }
+
+        #iniciar:active {
+            transform: translateY(4px);
+
+            box-shadow:
+                0 2px 0 #c9a900,
+                0 5px 10px rgba(0,0,0,0.45);
+        }
+
+        #iniciar:disabled {
+            opacity: 0.7;
+            cursor: default;
         }
 
         #estado {
-            margin-top: 18px;
+            margin-top: 22px;
             color: white;
             font-size: 14px;
+            min-height: 20px;
         }
+
+        #aviso {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 20px;
+            max-width: 300px;
+            line-height: 1.4;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
 <div id="game"></div>
 
+
 <div id="inicio">
-    <button id="iniciar">INICIAR JUEGO</button>
+
+    <h1 id="titulo">
+        POKÉMON AMARILLO
+    </h1>
+
+    <div id="subtitulo">
+        EDICIÓN ESPECIAL PIKACHU
+    </div>
+
+    <button id="iniciar">
+        INICIAR JUEGO
+    </button>
+
     <div id="estado"></div>
+
+    <div id="aviso">
+        Guarda la partida desde el menú del juego
+        y espera unos segundos antes de cerrar.
+    </div>
+
 </div>
+
 
 <script>
 
     /*
-       CONFIGURACIÓN DEL JUEGO
+       CONFIGURACIÓN DEL EMULADOR
     */
 
     window.EJS_player = "#game";
 
+
+    /*
+       GAME BOY
+    */
+
     window.EJS_core = "gb";
 
-    window.EJS_gameName = "mi-juego";
 
     /*
-       NO CAMBIAR ESTE ID.
-       Mantenerlo permite conservar los mismos guardados.
+       NOMBRE DEL JUEGO
     */
+
+    window.EJS_gameName = "pokemon-amarillo";
+
+
+    /*
+       ID FIJO DEL JUEGO
+
+       IMPORTANTE:
+       NO CAMBIAR ESTE NÚMERO
+       SI QUIERES MANTENER LOS GUARDADOS.
+    */
+
     window.EJS_gameID = 1001;
 
+
     /*
-       Creamos una dirección absoluta a la ROM.
+       ROM
     */
+
     window.EJS_gameUrl =
-        new URL("./roms/juego.gb", window.location.href).href;
+        new URL(
+            "./roms/juego.gb",
+            window.location.href
+        ).href;
+
+
+    /*
+       ARCHIVOS DE EMULATORJS
+    */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
-    /*
-       Después del toque del usuario podemos iniciar automáticamente.
-    */
-    window.EJS_startOnLoaded = true;
 
     /*
-       Guardar periódicamente.
+       ARRANCA AUTOMÁTICAMENTE
+       DESPUÉS DE QUE EL USUARIO
+       PULSE EL BOTÓN
     */
+
+    window.EJS_startOnLoaded = true;
+
+
+    /*
+       FORZAR GUARDADO
+       APROXIMADAMENTE CADA 7 SEGUNDOS
+    */
+
     window.EJS_fixedSaveInterval = 7000;
+
+
+    /*
+       SAVE STATES EN EL NAVEGADOR
+    */
 
     window.EJS_defaultOptions = {
         "save-state-location": "browser"
     };
+
+
+    /*
+       BOTONES DEL EMULADOR
+    */
 
     window.EJS_Buttons = {
 
@@ -133,52 +266,90 @@
         fullscreen: {
             visible: true
         }
+
     };
 
 
     /*
-       BOTÓN DE INICIO
+       PANTALLA DE INICIO
     */
 
-    const boton = document.getElementById("iniciar");
-    const estado = document.getElementById("estado");
-    const pantallaInicio = document.getElementById("inicio");
+    const boton =
+        document.getElementById("iniciar");
 
-    boton.addEventListener("click", function () {
+    const estado =
+        document.getElementById("estado");
 
-        /*
-           Impedimos pulsarlo dos veces.
-        */
-        boton.disabled = true;
-        boton.textContent = "CARGANDO...";
-        estado.textContent = "Preparando el juego...";
+    const pantallaInicio =
+        document.getElementById("inicio");
 
-        /*
-           Solo AHORA cargamos EmulatorJS.
-        */
-        const script = document.createElement("script");
 
-        script.src =
-            "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
+    /*
+       AL PULSAR INICIAR JUEGO
+    */
 
-        script.onload = function () {
+    boton.addEventListener(
+        "click",
+        function () {
+
+            boton.disabled = true;
+
+            boton.textContent =
+                "CARGANDO...";
+
+            estado.textContent =
+                "Preparando Pokémon Amarillo...";
+
 
             /*
-               Quitamos nuestra pantalla de inicio.
+               CARGAMOS EMULATORJS
+               SOLO DESPUÉS DEL TOQUE
             */
-            pantallaInicio.style.display = "none";
-        };
 
-        script.onerror = function () {
+            const script =
+                document.createElement("script");
 
-            boton.disabled = false;
-            boton.textContent = "REINTENTAR";
-            estado.textContent =
-                "No se pudo cargar el emulador. Comprueba la conexión.";
-        };
 
-        document.body.appendChild(script);
-    });
+            script.src =
+                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
+
+
+            /*
+               CUANDO EL EMULADOR
+               SE HAYA CARGADO
+            */
+
+            script.onload =
+                function () {
+
+                    pantallaInicio.style.display =
+                        "none";
+
+                };
+
+
+            /*
+               SI HAY ERROR
+            */
+
+            script.onerror =
+                function () {
+
+                    boton.disabled = false;
+
+                    boton.textContent =
+                        "REINTENTAR";
+
+                    estado.textContent =
+                        "No se pudo cargar el emulador. Comprueba la conexión.";
+
+                };
+
+
+            document.body.appendChild(script);
+
+        }
+    );
 
 </script>
 
