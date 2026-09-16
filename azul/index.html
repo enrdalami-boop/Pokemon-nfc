@@ -16,57 +16,37 @@
 
     <style>
 
-        html,
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
-
             background: #000;
-
             overflow: hidden;
-
             font-family: Arial, Helvetica, sans-serif;
         }
 
-
         #game {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
         }
 
-
         #tituloPokemon {
-
             position: fixed;
-
             top: 11%;
             left: 0;
-
             width: 100%;
-
             z-index: 9999;
-
             text-align: center;
-
             pointer-events: none;
         }
 
-
         #tituloPokemon h1 {
-
             margin: 0;
-
             color: #2196f3;
-
             font-size: 36px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
-
             line-height: 1.15;
 
             text-shadow:
@@ -74,17 +54,11 @@
                 4px 4px 8px #000;
         }
 
-
         #tituloPokemon p {
-
             margin-top: 10px;
-
             color: white;
-
             font-size: 15px;
-
             font-weight: bold;
-
             letter-spacing: 1px;
         }
 
@@ -95,8 +69,6 @@
 
 <body>
 
-
-<!-- TÍTULO INICIAL -->
 
 <div id="tituloPokemon">
 
@@ -112,8 +84,6 @@
 </div>
 
 
-<!-- EMULADOR -->
-
 <div id="game"></div>
 
 
@@ -121,35 +91,39 @@
 
     /*
     =========================================
-    POKÉMON AZUL
+    POKÉMON AZUL - GAME BOY ADVANCE
     =========================================
-    */
-
-
-    /*
-    DÓNDE SE CARGA EL EMULADOR
     */
 
     window.EJS_player = "#game";
 
 
     /*
-    IMPORTANTE:
+    GAME BOY ADVANCE
 
-    Usamos mGBA aunque el archivo sea .gb
+    IMPORTANTE:
+    Como la ROM es .gba usamos "gba".
+    EmulatorJS utilizará mGBA.
     */
 
     window.EJS_core = "gba";
 
 
     /*
-    HACE QUE LOS CONTROLES SEAN
-    LOS DE GAME BOY.
-
-    Así evitamos L/R de GBA.
+    CONTROLES DE GAME BOY ADVANCE
     */
 
     window.EJS_controlScheme = "gba";
+
+
+    /*
+    MUY IMPORTANTE PARA IPHONE Y ANDROID
+
+    Fuerza la interfaz móvil para que
+    aparezcan los controles táctiles.
+    */
+
+    window.EJS_browserMode = "mobile";
 
 
     /*
@@ -172,7 +146,10 @@
 
 
     /*
-    ARCHIVO DE POKÉMON AZUL
+    ROM
+
+    El archivo debe llamarse exactamente:
+    juego.gba
     */
 
     window.EJS_gameUrl =
@@ -180,7 +157,7 @@
 
 
     /*
-    ARCHIVOS EMULATORJS
+    EMULATORJS
     */
 
     window.EJS_pathtodata =
@@ -188,10 +165,12 @@
 
 
     /*
-    EL USUARIO PULSA INICIAR JUEGO
+    NO ARRANCA HASTA TOCAR
+    INICIAR JUEGO
     */
 
-    window.EJS_startOnLoaded = false;
+    window.EJS_startOnLoaded =
+        false;
 
 
     /*
@@ -219,7 +198,7 @@
 
 
     /*
-    FONDO
+    FONDO NEGRO
     */
 
     window.EJS_backgroundColor =
@@ -235,37 +214,13 @@
 
 
     /*
-    =========================================
-    CONFIGURACIÓN IMPORTANTE DE mGBA
-    =========================================
+    GUARDADOS EN EL NAVEGADOR
 
-    Aquí quitamos el marco de Super Game Boy.
+    Ya NO ponemos opciones de Super Game Boy
+    porque esto ahora es un juego de GBA.
     */
 
     window.EJS_defaultOptions = {
-
-        /*
-        NO MOSTRAR EL BORDE
-        SUPER GAME BOY
-        */
-
-        "mgba_sgb_borders": "OFF",
-
-
-        /*
-        FORZAR GAME BOY COLOR
-
-        Evita que Pokémon Azul arranque
-        como Super Game Boy.
-        */
-
-        "mgba_gb_model":
-            "Game Boy Color",
-
-
-        /*
-        GUARDADOS EN EL NAVEGADOR
-        */
 
         "save-state-location":
             "browser"
@@ -274,8 +229,8 @@
 
 
     /*
-    CUANDO ARRANQUE EL JUEGO
-    QUITAMOS EL TÍTULO
+    CUANDO ARRANQUE EL JUEGO,
+    QUITAMOS EL TÍTULO.
     */
 
     window.EJS_onGameStart =
@@ -298,8 +253,6 @@
 
 </script>
 
-
-<!-- EMULATORJS -->
 
 <script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
 
