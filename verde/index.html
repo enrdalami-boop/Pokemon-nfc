@@ -16,14 +16,14 @@
 
     <style>
 
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             background: #000;
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
         #game {
@@ -31,146 +31,54 @@
             height: 100%;
         }
 
-        #inicio {
+        #tituloPokemon {
             position: fixed;
-            inset: 0;
+            top: 12%;
+            left: 0;
+            width: 100%;
             z-index: 9999;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #242424 0%,
-                    #101010 55%,
-                    #000000 100%
-                );
-
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+            pointer-events: none;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        #titulo {
-            color: #35c653;
-
-            font-size: 36px;
+        #tituloPokemon h1 {
+            margin: 0;
+            color: #39b54a;
+            font-size: 34px;
             font-weight: 900;
-
-            margin: 0 0 8px 0;
-
             letter-spacing: 2px;
-
-            line-height: 1.15;
 
             text-shadow:
                 2px 2px 0 #ffffff,
-                4px 4px 8px rgba(0,0,0,0.8);
+                4px 4px 8px #000;
         }
 
-        #subtitulo {
-            color: white;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 35px;
-
-            opacity: 0.95;
-        }
-
-        #iniciar {
-            background: #35c653;
-            color: white;
-
-            border: none;
-            border-radius: 14px;
-
-            padding: 18px 40px;
-
-            font-size: 20px;
-            font-weight: 900;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 7px 0 #218c38,
-                0 11px 20px rgba(0,0,0,0.45);
-
-            transition:
-                transform 0.1s ease,
-                box-shadow 0.1s ease;
-        }
-
-        #iniciar:active {
-            transform: translateY(4px);
-
-            box-shadow:
-                0 3px 0 #218c38,
-                0 6px 10px rgba(0,0,0,0.45);
-        }
-
-        #iniciar:disabled {
-            opacity: 0.7;
-        }
-
-        #estado {
-            margin-top: 22px;
+        #tituloPokemon p {
+            margin-top: 8px;
             color: white;
             font-size: 14px;
-            min-height: 20px;
-        }
-
-        #aviso {
-            color: #aaa;
-
-            font-size: 12px;
-
-            margin-top: 70px;
-
-            max-width: 330px;
-
-            line-height: 1.5;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
     </style>
 
 </head>
 
-
 <body>
 
-<div id="game"></div>
 
+<div id="tituloPokemon">
 
-<div id="inicio">
+    <h1>POKÉMON VERDE</h1>
 
-    <h1 id="titulo">
-        POKÉMON<br>
-        VERDE
-    </h1>
-
-    <div id="subtitulo">
-        EDICIÓN VERDE
-    </div>
-
-    <button id="iniciar">
-        INICIAR JUEGO
-    </button>
-
-    <div id="estado"></div>
-
-    <div id="aviso">
-        Guarda la partida desde el menú del juego y espera
-        unos segundos antes de cerrar.
-    </div>
+    <p>EDICIÓN VERDE</p>
 
 </div>
+
+
+<div id="game"></div>
 
 
 <script>
@@ -183,13 +91,24 @@
 
     window.EJS_gameID = 1003;
 
-    window.EJS_gameUrl =
-        "./roms/juego.gb";
+    window.EJS_gameUrl = "./roms/juego.gb";
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
-    window.EJS_startOnLoaded = true;
+    window.EJS_startOnLoaded = false;
+
+    window.EJS_startButtonName =
+        "INICIAR JUEGO";
+
+    window.EJS_alignStartButton =
+        "center";
+
+    window.EJS_color =
+        "#39b54a";
+
+    window.EJS_backgroundColor =
+        "#000000";
 
     window.EJS_fixedSaveInterval =
         7000;
@@ -198,62 +117,25 @@
         "save-state-location": "browser"
     };
 
-
-    const boton =
-        document.getElementById("iniciar");
-
-    const estado =
-        document.getElementById("estado");
-
-    const pantallaInicio =
-        document.getElementById("inicio");
-
-
-    boton.addEventListener(
-        "click",
+    window.EJS_onGameStart =
         function () {
 
-            boton.disabled = true;
+            const titulo =
+                document.getElementById(
+                    "tituloPokemon"
+                );
 
-            boton.textContent =
-                "CARGANDO...";
+            if (titulo) {
+                titulo.style.display = "none";
+            }
 
-            estado.textContent =
-                "Preparando Pokémon Verde...";
-
-            const script =
-                document.createElement("script");
-
-            script.src =
-                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
-
-            script.onload =
-                function () {
-
-                    pantallaInicio.style.display =
-                        "none";
-
-                };
-
-            script.onerror =
-                function () {
-
-                    boton.disabled = false;
-
-                    boton.textContent =
-                        "REINTENTAR";
-
-                    estado.textContent =
-                        "No se pudo cargar el emulador.";
-
-                };
-
-            document.body.appendChild(script);
-
-        }
-    );
+        };
 
 </script>
+
+
+<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
+
 
 </body>
 
