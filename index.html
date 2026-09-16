@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
 
@@ -63,6 +64,7 @@
             font-weight: 900;
             margin: 0 0 8px 0;
             letter-spacing: 2px;
+
             text-shadow:
                 2px 2px 0 #1d4fa3,
                 4px 4px 8px rgba(0,0,0,0.8);
@@ -135,6 +137,7 @@
 
 <body>
 
+
 <div id="game"></div>
 
 
@@ -165,39 +168,61 @@
 <script>
 
     /*
-       CONFIGURACIÓN DEL EMULADOR
+    =========================================
+    CONFIGURACIÓN POKÉMON AMARILLO
+    =========================================
+    */
+
+
+    /*
+    EMULADOR
     */
 
     window.EJS_player = "#game";
 
 
     /*
-       GAME BOY
+    NÚCLEO mGBA
+
+    Aunque la ROM sea .gb,
+    utilizamos mGBA.
     */
 
     window.EJS_core = "mgba";
 
 
     /*
-       NOMBRE DEL JUEGO
+    CONTROLES DE GAME BOY
+
+    Evita controles L/R de Game Boy Advance.
     */
 
-    window.EJS_gameName = "pokemon-amarillo";
+    window.EJS_controlScheme = "gb";
 
 
     /*
-       ID FIJO DEL JUEGO
+    NOMBRE DEL JUEGO
+    */
 
-       IMPORTANTE:
-       NO CAMBIAR ESTE NÚMERO
-       SI QUIERES MANTENER LOS GUARDADOS.
+    window.EJS_gameName =
+        "pokemon-amarillo";
+
+
+    /*
+    ID ÚNICO
+
+    Amarillo = 1001
+    Azul     = 1002
+    Verde    = 1003
+
+    NO CAMBIAR ESTE NÚMERO.
     */
 
     window.EJS_gameID = 1001;
 
 
     /*
-       ROM
+    ROM POKÉMON AMARILLO
     */
 
     window.EJS_gameUrl =
@@ -208,7 +233,7 @@
 
 
     /*
-       ARCHIVOS DE EMULATORJS
+    ARCHIVOS EMULATORJS
     */
 
     window.EJS_pathtodata =
@@ -216,33 +241,61 @@
 
 
     /*
-       ARRANCA AUTOMÁTICAMENTE
-       DESPUÉS DE QUE EL USUARIO
-       PULSE EL BOTÓN
+    EL EMULADOR ARRANCA
+    DESPUÉS DE PULSAR NUESTRO BOTÓN
     */
 
     window.EJS_startOnLoaded = true;
 
 
     /*
-       FORZAR GUARDADO
-       APROXIMADAMENTE CADA 7 SEGUNDOS
+    GUARDADO PERIÓDICO
     */
 
-    window.EJS_fixedSaveInterval = 7000;
+    window.EJS_fixedSaveInterval =
+        7000;
 
 
     /*
-       SAVE STATES EN EL NAVEGADOR
+    =========================================
+    CONFIGURACIÓN mGBA
+    =========================================
     */
 
     window.EJS_defaultOptions = {
-        "save-state-location": "browser"
+
+        /*
+        QUITAR MARCO SUPER GAME BOY
+        */
+
+        "mgba_sgb_borders":
+            "OFF",
+
+
+        /*
+        FORZAR GAME BOY COLOR
+
+        Evita que Pokémon Amarillo
+        muestre el marco Super Game Boy.
+        */
+
+        "mgba_gb_model":
+            "Game Boy Color",
+
+
+        /*
+        GUARDADOS DEL EMULADOR
+        EN EL NAVEGADOR
+        */
+
+        "save-state-location":
+            "browser"
+
     };
 
 
     /*
-       BOTONES DEL EMULADOR
+    BOTONES DEL EMULADOR
     */
 
     window.EJS_Buttons = {
@@ -271,7 +324,9 @@
 
 
     /*
-       PANTALLA DE INICIO
+    =========================================
+    PANTALLA INICIAL
+    =========================================
     */
 
     const boton =
@@ -285,7 +340,7 @@
 
 
     /*
-       AL PULSAR INICIAR JUEGO
+    AL PULSAR INICIAR JUEGO
     */
 
     boton.addEventListener(
@@ -302,8 +357,8 @@
 
 
             /*
-               CARGAMOS EMULATORJS
-               SOLO DESPUÉS DEL TOQUE
+            CARGAMOS EMULATORJS
+            DESPUÉS DEL TOQUE
             */
 
             const script =
@@ -315,8 +370,8 @@
 
 
             /*
-               CUANDO EL EMULADOR
-               SE HAYA CARGADO
+            CUANDO EL EMULADOR
+            SE HAYA CARGADO
             */
 
             script.onload =
@@ -329,7 +384,7 @@
 
 
             /*
-               SI HAY ERROR
+            SI HAY ERROR
             */
 
             script.onerror =
@@ -353,5 +408,7 @@
 
 </script>
 
+
 </body>
+
 </html>
