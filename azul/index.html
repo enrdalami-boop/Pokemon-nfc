@@ -16,14 +16,14 @@
 
     <style>
 
-        html,
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             background: #000;
             overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         #game {
@@ -31,51 +31,111 @@
             height: 100%;
         }
 
-        #tituloPokemon {
+        #inicio {
             position: fixed;
-
-            top: 12%;
-            left: 0;
-
-            width: 100%;
-
+            inset: 0;
             z-index: 9999;
 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #242424 0%,
+                    #101010 55%,
+                    #000000 100%
+                );
+
             text-align: center;
-
-            pointer-events: none;
-
-            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        #tituloPokemon h1 {
-
-            margin: 0;
-
+        #titulo {
             color: #2196f3;
 
-            font-size: 34px;
-
+            font-size: 36px;
             font-weight: 900;
+
+            margin: 0 0 8px 0;
 
             letter-spacing: 2px;
 
+            line-height: 1.15;
+
             text-shadow:
                 2px 2px 0 #ffffff,
-                4px 4px 8px #000;
+                4px 4px 8px rgba(0,0,0,0.8);
         }
 
-        #tituloPokemon p {
-
-            margin-top: 8px;
-
+        #subtitulo {
             color: white;
 
-            font-size: 14px;
-
+            font-size: 15px;
             font-weight: bold;
 
             letter-spacing: 1px;
+
+            margin-bottom: 35px;
+
+            opacity: 0.95;
+        }
+
+        #iniciar {
+            background: #2196f3;
+            color: white;
+
+            border: none;
+            border-radius: 14px;
+
+            padding: 18px 40px;
+
+            font-size: 20px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 0 #1565c0,
+                0 11px 20px rgba(0,0,0,0.45);
+
+            transition:
+                transform 0.1s ease,
+                box-shadow 0.1s ease;
+        }
+
+        #iniciar:active {
+            transform: translateY(4px);
+
+            box-shadow:
+                0 3px 0 #1565c0,
+                0 6px 10px rgba(0,0,0,0.45);
+        }
+
+        #iniciar:disabled {
+            opacity: 0.7;
+        }
+
+        #estado {
+            margin-top: 22px;
+            color: white;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        #aviso {
+            color: #aaa;
+
+            font-size: 12px;
+
+            margin-top: 70px;
+
+            max-width: 330px;
+
+            line-height: 1.5;
         }
 
     </style>
@@ -85,71 +145,66 @@
 
 <body>
 
+<div id="game"></div>
 
-<!-- TÍTULO -->
 
-<div id="tituloPokemon">
+<div id="inicio">
 
-    <h1>
-        POKÉMON AZUL
+    <h1 id="titulo">
+        POKÉMON<br>
+        AZUL
     </h1>
 
-    <p>
+    <div id="subtitulo">
         EDICIÓN AZUL
-    </p>
+    </div>
+
+    <button id="iniciar">
+        INICIAR JUEGO
+    </button>
+
+    <div id="estado"></div>
+
+    <div id="aviso">
+        Guarda la partida desde el menú del juego y espera
+        unos segundos antes de cerrar.
+    </div>
 
 </div>
-
-
-<!-- EMULADOR -->
-
-<div id="game"></div>
 
 
 <script>
 
     /*
     ========================================
-    CONFIGURACIÓN DEL JUEGO
+    CONFIGURACIÓN POKÉMON AZUL
     ========================================
     */
 
     window.EJS_player = "#game";
 
-
-    /*
-    GAME BOY
-    */
-
     window.EJS_core = "gb";
-
-
-    /*
-    NOMBRE DEL JUEGO
-    */
 
     window.EJS_gameName = "pokemon-azul";
 
 
     /*
-    ID DEL JUEGO
+    ID ÚNICO DE AZUL
 
     Amarillo = 1001
-    Azul = 1002
-    Verde = 1003
-
-    NO CAMBIARLO DESPUÉS,
-    PARA CONSERVAR LOS GUARDADOS.
+    Azul     = 1002
+    Verde    = 1003
     */
 
     window.EJS_gameID = 1002;
 
 
     /*
-    ARCHIVO DEL JUEGO
+    ROM
     */
 
-    window.EJS_gameUrl = "./roms/juego.gb";
+    window.EJS_gameUrl =
+        "./roms/juego.gb";
 
 
     /*
@@ -161,43 +216,11 @@
 
 
     /*
-    NO ARRANCAR HASTA QUE
-    EL USUARIO PULSE EL BOTÓN
+    EL JUEGO ARRANCA DESPUÉS
+    DE PULSAR NUESTRO BOTÓN
     */
 
-    window.EJS_startOnLoaded = false;
-
-
-    /*
-    TEXTO DEL BOTÓN
-    */
-
-    window.EJS_startButtonName =
-        "INICIAR JUEGO";
-
-
-    /*
-    BOTÓN CENTRADO
-    */
-
-    window.EJS_alignStartButton =
-        "center";
-
-
-    /*
-    COLOR AZUL
-    */
-
-    window.EJS_color =
-        "#2196f3";
-
-
-    /*
-    FONDO NEGRO
-    */
-
-    window.EJS_backgroundColor =
-        "#000000";
+    window.EJS_startOnLoaded = true;
 
 
     /*
@@ -213,41 +236,86 @@
     */
 
     window.EJS_defaultOptions = {
-
-        "save-state-location":
-            "browser"
-
+        "save-state-location": "browser"
     };
 
 
     /*
-    AL COMENZAR EL JUEGO
-    QUITAMOS EL TÍTULO
+    BOTÓN INICIAR
     */
 
-    window.EJS_onGameStart =
+    const boton =
+        document.getElementById("iniciar");
+
+    const estado =
+        document.getElementById("estado");
+
+    const pantallaInicio =
+        document.getElementById("inicio");
+
+
+    boton.addEventListener(
+        "click",
         function () {
 
-            const titulo =
-                document.getElementById(
-                    "tituloPokemon"
-                );
+            boton.disabled = true;
 
-            if (titulo) {
+            boton.textContent =
+                "CARGANDO...";
 
-                titulo.style.display =
-                    "none";
+            estado.textContent =
+                "Preparando Pokémon Azul...";
 
-            }
 
-        };
+            /*
+            CARGAMOS EL EMULADOR
+            */
 
+            const script =
+                document.createElement("script");
+
+
+            script.src =
+                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
+
+
+            /*
+            CUANDO TERMINE DE CARGAR
+            */
+
+            script.onload =
+                function () {
+
+                    pantallaInicio.style.display =
+                        "none";
+
+                };
+
+
+            /*
+            SI HAY ERROR
+            */
+
+            script.onerror =
+                function () {
+
+                    boton.disabled = false;
+
+                    boton.textContent =
+                        "REINTENTAR";
+
+                    estado.textContent =
+                        "No se pudo cargar el emulador.";
+
+                };
+
+
+            document.body.appendChild(script);
+
+        }
+    );
 
 </script>
-
-
-<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
-
 
 </body>
 
