@@ -33,20 +33,31 @@
 
         #tituloPokemon {
             position: fixed;
+
             top: 12%;
             left: 0;
+
             width: 100%;
+
             z-index: 9999;
+
             text-align: center;
+
             pointer-events: none;
+
             font-family: Arial, Helvetica, sans-serif;
         }
 
         #tituloPokemon h1 {
+
             margin: 0;
+
             color: #39b54a;
+
             font-size: 34px;
+
             font-weight: 900;
+
             letter-spacing: 2px;
 
             text-shadow:
@@ -55,10 +66,15 @@
         }
 
         #tituloPokemon p {
+
             margin-top: 8px;
+
             color: white;
+
             font-size: 14px;
+
             font-weight: bold;
+
             letter-spacing: 1px;
         }
 
@@ -66,74 +82,135 @@
 
 </head>
 
+
 <body>
+
+
+<!-- TÍTULO -->
 
 <div id="tituloPokemon">
 
-    <h1>POKÉMON VERDE</h1>
+    <h1>
+        POKÉMON VERDE
+    </h1>
 
-    <p>EDICIÓN VERDE</p>
+    <p>
+        EDICIÓN VERDE
+    </p>
 
 </div>
 
+
+<!-- EMULADOR -->
+
 <div id="game"></div>
+
 
 <script>
 
+    /*
+    ========================================
+    CONFIGURACIÓN DEL JUEGO
+    ========================================
+    */
+
     window.EJS_player = "#game";
 
+
+    /*
+    GAME BOY
+    */
+
     window.EJS_core = "gb";
+
+
+    /*
+    NOMBRE DEL JUEGO
+    */
 
     window.EJS_gameName = "pokemon-verde";
 
 
     /*
-       VERDE TIENE SU PROPIO ID
-       Amarillo = 1001
-       Azul     = 1002
-       Verde    = 1003
+    ID DEL JUEGO
+
+    Amarillo = 1001
+    Azul = 1002
+    Verde = 1003
+
+    NO CAMBIARLO DESPUÉS,
+    PARA CONSERVAR LOS GUARDADOS.
     */
 
     window.EJS_gameID = 1003;
 
 
     /*
-       ROM DE POKÉMON VERDE
+    ARCHIVO DEL JUEGO
     */
 
     window.EJS_gameUrl = "./roms/juego.gb";
 
 
+    /*
+    EMULATORJS
+    */
+
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
+    /*
+    NO ARRANCAR HASTA QUE
+    EL USUARIO PULSE EL BOTÓN
+    */
+
     window.EJS_startOnLoaded = false;
 
+
+    /*
+    TEXTO DEL BOTÓN
+    */
 
     window.EJS_startButtonName =
         "INICIAR JUEGO";
 
+
+    /*
+    BOTÓN CENTRADO
+    */
 
     window.EJS_alignStartButton =
         "center";
 
 
     /*
-       COLOR VERDE
+    COLOR VERDE
     */
 
     window.EJS_color =
         "#39b54a";
 
 
+    /*
+    FONDO NEGRO
+    */
+
     window.EJS_backgroundColor =
         "#000000";
 
 
+    /*
+    GUARDADO PERIÓDICO
+    */
+
     window.EJS_fixedSaveInterval =
         7000;
 
+
+    /*
+    SAVE STATES EN EL NAVEGADOR
+    */
 
     window.EJS_defaultOptions = {
 
@@ -142,6 +219,11 @@
 
     };
 
+
+    /*
+    AL COMENZAR EL JUEGO
+    QUITAMOS EL TÍTULO
+    */
 
     window.EJS_onGameStart =
         function () {
@@ -152,14 +234,20 @@
                 );
 
             if (titulo) {
-                titulo.style.display = "none";
+
+                titulo.style.display =
+                    "none";
+
             }
 
         };
 
+
 </script>
 
+
 <script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
+
 
 </body>
 
