@@ -16,51 +16,54 @@
 
     <style>
 
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
+
             background: #000;
+
             overflow: hidden;
+
             font-family: Arial, Helvetica, sans-serif;
         }
 
+
         #game {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
         }
 
-        #inicio {
+
+        #tituloPokemon {
+
             position: fixed;
-            inset: 0;
+
+            top: 11%;
+            left: 0;
+
+            width: 100%;
+
             z-index: 9999;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #242424 0%,
-                    #101010 55%,
-                    #000000 100%
-                );
-
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+
+            pointer-events: none;
         }
 
-        #titulo {
+
+        #tituloPokemon h1 {
+
+            margin: 0;
+
             color: #2196f3;
 
             font-size: 36px;
-            font-weight: 900;
 
-            margin: 0 0 8px 0;
+            font-weight: 900;
 
             letter-spacing: 2px;
 
@@ -68,74 +71,21 @@
 
             text-shadow:
                 2px 2px 0 #ffffff,
-                4px 4px 8px rgba(0,0,0,0.8);
+                4px 4px 8px #000;
         }
 
-        #subtitulo {
+
+        #tituloPokemon p {
+
+            margin-top: 10px;
+
             color: white;
 
             font-size: 15px;
+
             font-weight: bold;
 
             letter-spacing: 1px;
-
-            margin-bottom: 35px;
-
-            opacity: 0.95;
-        }
-
-        #iniciar {
-            background: #2196f3;
-            color: white;
-
-            border: none;
-            border-radius: 14px;
-
-            padding: 18px 40px;
-
-            font-size: 20px;
-            font-weight: 900;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 7px 0 #1565c0,
-                0 11px 20px rgba(0,0,0,0.45);
-
-            transition:
-                transform 0.1s ease,
-                box-shadow 0.1s ease;
-        }
-
-        #iniciar:active {
-            transform: translateY(4px);
-
-            box-shadow:
-                0 3px 0 #1565c0,
-                0 6px 10px rgba(0,0,0,0.45);
-        }
-
-        #iniciar:disabled {
-            opacity: 0.7;
-        }
-
-        #estado {
-            margin-top: 22px;
-            color: white;
-            font-size: 14px;
-            min-height: 20px;
-        }
-
-        #aviso {
-            color: #aaa;
-
-            font-size: 12px;
-
-            margin-top: 70px;
-
-            max-width: 330px;
-
-            line-height: 1.5;
         }
 
     </style>
@@ -145,51 +95,73 @@
 
 <body>
 
-<div id="game"></div>
 
+<!-- TÍTULO INICIAL -->
 
-<div id="inicio">
+<div id="tituloPokemon">
 
-    <h1 id="titulo">
+    <h1>
         POKÉMON<br>
         AZUL
     </h1>
 
-    <div id="subtitulo">
+    <p>
         EDICIÓN AZUL
-    </div>
-
-    <button id="iniciar">
-        INICIAR JUEGO
-    </button>
-
-    <div id="estado"></div>
-
-    <div id="aviso">
-        Guarda la partida desde el menú del juego y espera
-        unos segundos antes de cerrar.
-    </div>
+    </p>
 
 </div>
+
+
+<!-- EMULADOR -->
+
+<div id="game"></div>
 
 
 <script>
 
     /*
-    ========================================
-    CONFIGURACIÓN POKÉMON AZUL
-    ========================================
+    =========================================
+    POKÉMON AZUL
+    =========================================
+    */
+
+
+    /*
+    DÓNDE SE CARGA EL EMULADOR
     */
 
     window.EJS_player = "#game";
 
-    window.EJS_core = "mgba";
 
-    window.EJS_gameName = "pokemon-azul";
+    /*
+    IMPORTANTE:
+
+    Usamos mGBA aunque el archivo sea .gb
+    */
+
+    window.EJS_core = "mgba";
 
 
     /*
-    ID ÚNICO DE AZUL
+    HACE QUE LOS CONTROLES SEAN
+    LOS DE GAME BOY.
+
+    Así evitamos L/R de GBA.
+    */
+
+    window.EJS_controlScheme = "gb";
+
+
+    /*
+    NOMBRE DEL JUEGO
+    */
+
+    window.EJS_gameName =
+        "pokemon-azul";
+
+
+    /*
+    ID ÚNICO
 
     Amarillo = 1001
     Azul     = 1002
@@ -200,7 +172,7 @@
 
 
     /*
-    ROM
+    ARCHIVO DE POKÉMON AZUL
     */
 
     window.EJS_gameUrl =
@@ -208,7 +180,7 @@
 
 
     /*
-    EMULATORJS
+    ARCHIVOS EMULATORJS
     */
 
     window.EJS_pathtodata =
@@ -216,11 +188,42 @@
 
 
     /*
-    EL JUEGO ARRANCA DESPUÉS
-    DE PULSAR NUESTRO BOTÓN
+    EL USUARIO PULSA INICIAR JUEGO
     */
 
-    window.EJS_startOnLoaded = true;
+    window.EJS_startOnLoaded = false;
+
+
+    /*
+    TEXTO DEL BOTÓN
+    */
+
+    window.EJS_startButtonName =
+        "INICIAR JUEGO";
+
+
+    /*
+    BOTÓN CENTRADO
+    */
+
+    window.EJS_alignStartButton =
+        "center";
+
+
+    /*
+    COLOR AZUL
+    */
+
+    window.EJS_color =
+        "#2196f3";
+
+
+    /*
+    FONDO
+    */
+
+    window.EJS_backgroundColor =
+        "#000000";
 
 
     /*
@@ -232,90 +235,74 @@
 
 
     /*
-    SAVE STATES EN EL NAVEGADOR
+    =========================================
+    CONFIGURACIÓN IMPORTANTE DE mGBA
+    =========================================
+
+    Aquí quitamos el marco de Super Game Boy.
     */
 
     window.EJS_defaultOptions = {
-        "save-state-location": "browser"
+
+        /*
+        NO MOSTRAR EL BORDE
+        SUPER GAME BOY
+        */
+
+        "mgba_sgb_borders": "OFF",
+
+
+        /*
+        FORZAR GAME BOY COLOR
+
+        Evita que Pokémon Azul arranque
+        como Super Game Boy.
+        */
+
+        "mgba_gb_model":
+            "Game Boy Color",
+
+
+        /*
+        GUARDADOS EN EL NAVEGADOR
+        */
+
+        "save-state-location":
+            "browser"
+
     };
 
 
     /*
-    BOTÓN INICIAR
+    CUANDO ARRANQUE EL JUEGO
+    QUITAMOS EL TÍTULO
     */
 
-    const boton =
-        document.getElementById("iniciar");
-
-    const estado =
-        document.getElementById("estado");
-
-    const pantallaInicio =
-        document.getElementById("inicio");
-
-
-    boton.addEventListener(
-        "click",
+    window.EJS_onGameStart =
         function () {
 
-            boton.disabled = true;
+            const titulo =
+                document.getElementById(
+                    "tituloPokemon"
+                );
 
-            boton.textContent =
-                "CARGANDO...";
+            if (titulo) {
 
-            estado.textContent =
-                "Preparando Pokémon Azul...";
+                titulo.style.display =
+                    "none";
 
+            }
 
-            /*
-            CARGAMOS EL EMULADOR
-            */
+        };
 
-            const script =
-                document.createElement("script");
-
-
-            script.src =
-                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
-
-
-            /*
-            CUANDO TERMINE DE CARGAR
-            */
-
-            script.onload =
-                function () {
-
-                    pantallaInicio.style.display =
-                        "none";
-
-                };
-
-
-            /*
-            SI HAY ERROR
-            */
-
-            script.onerror =
-                function () {
-
-                    boton.disabled = false;
-
-                    boton.textContent =
-                        "REINTENTAR";
-
-                    estado.textContent =
-                        "No se pudo cargar el emulador.";
-
-                };
-
-
-            document.body.appendChild(script);
-
-        }
-    );
 
 </script>
+
+
+<!-- EMULATORJS -->
+
+<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
+
 
 </body>
 
