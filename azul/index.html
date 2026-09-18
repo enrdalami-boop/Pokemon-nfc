@@ -16,7 +16,8 @@
 
     <style>
 
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -26,14 +27,20 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+
         #game {
             width: 100%;
             height: 100%;
         }
 
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
         #tituloPokemon {
             position: fixed;
-            top: 11%;
+            top: 6%;
             left: 0;
             width: 100%;
             z-index: 9999;
@@ -41,25 +48,182 @@
             pointer-events: none;
         }
 
-        #tituloPokemon h1 {
+
+        /* POKÉMON */
+
+        #tituloPokemon .pokemon {
+
             margin: 0;
-            color: #2196f3;
-            font-size: 36px;
+
+            color: #ffffff;
+
+            font-size: 40px;
+
             font-weight: 900;
-            letter-spacing: 2px;
-            line-height: 1.15;
+
+            letter-spacing: 4px;
+
+            line-height: 1;
+
+            text-shadow:
+                2px 2px 0 #2196f3,
+                4px 4px 8px #000;
+        }
+
+
+        /* AZUL */
+
+        #tituloPokemon .azul {
+
+            margin: 8px 0 0 0;
+
+            color: #2196f3;
+
+            font-size: 44px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            line-height: 1;
 
             text-shadow:
                 2px 2px 0 #ffffff,
                 4px 4px 8px #000;
         }
 
+
+        /* EDICIÓN AZUL */
+
         #tituloPokemon p {
-            margin-top: 10px;
+
+            margin-top: 12px;
+
             color: white;
-            font-size: 15px;
+
+            font-size: 14px;
+
             font-weight: bold;
-            letter-spacing: 1px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           BLASTOISE
+        ========================== */
+
+        #blastoiseInicio {
+
+            position: fixed;
+
+            top: 26%;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 185px;
+
+            max-width: 48vw;
+
+            height: auto;
+
+            z-index: 9998;
+
+            pointer-events: none;
+
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+
+        /* =========================
+           MÓVIL
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            #tituloPokemon {
+                top: 6%;
+            }
+
+
+            #tituloPokemon .pokemon {
+
+                font-size: 36px;
+
+                letter-spacing: 3px;
+            }
+
+
+            #tituloPokemon .azul {
+
+                font-size: 39px;
+
+                letter-spacing: 2px;
+            }
+
+
+            #tituloPokemon p {
+
+                font-size: 13px;
+
+                margin-top: 10px;
+            }
+
+
+            #blastoiseInicio {
+
+                top: 26%;
+
+                width: 175px;
+
+                max-width: 48vw;
+            }
+
+        }
+
+
+        /* =========================
+           PANTALLAS BAJAS
+        ========================== */
+
+        @media (max-height: 700px) {
+
+            #tituloPokemon {
+
+                top: 4%;
+            }
+
+
+            #tituloPokemon .pokemon {
+
+                font-size: 31px;
+            }
+
+
+            #tituloPokemon .azul {
+
+                font-size: 34px;
+            }
+
+
+            #tituloPokemon p {
+
+                font-size: 11px;
+
+                margin-top: 8px;
+            }
+
+
+            #blastoiseInicio {
+
+                top: 24%;
+
+                width: 150px;
+            }
+
         }
 
     </style>
@@ -70,10 +234,17 @@
 <body>
 
 
+<!-- =========================
+     PORTADA
+========================== -->
+
 <div id="tituloPokemon">
 
-    <h1>
-        POKÉMON<br>
+    <h1 class="pokemon">
+        POKÉMON
+    </h1>
+
+    <h1 class="azul">
         AZUL
     </h1>
 
@@ -84,6 +255,21 @@
 </div>
 
 
+<!-- =========================
+     BLASTOISE
+========================== -->
+
+<img
+    id="blastoiseInicio"
+    src="./blastoise.png"
+    alt="Blastoise"
+>
+
+
+<!-- =========================
+     EMULADOR
+========================== -->
+
 <div id="game"></div>
 
 
@@ -91,134 +277,87 @@
 
     /*
     =========================================
-    POKÉMON AZUL - GAME BOY ADVANCE
+    POKÉMON AZUL
     =========================================
     */
 
-    window.EJS_player = "#game";
+    window.EJS_player =
+        "#game";
 
 
-    /*
-    GAME BOY ADVANCE
+    /* GAME BOY ADVANCE */
 
-    IMPORTANTE:
-    Como la ROM es .gba usamos "gba".
-    EmulatorJS utilizará mGBA.
-    */
-
-    window.EJS_core = "gba";
+    window.EJS_core =
+        "gba";
 
 
-    /*
-    CONTROLES DE GAME BOY ADVANCE
-    */
+    /* CONTROLES GBA */
 
-    window.EJS_controlScheme = "gba";
-
-
-    /*
-    MUY IMPORTANTE PARA IPHONE Y ANDROID
-
-    Fuerza la interfaz móvil para que
-    aparezcan los controles táctiles.
-    */
-
-    window.EJS_browserMode = "mobile";
+    window.EJS_controlScheme =
+        "gba";
 
 
-    /*
-    NOMBRE DEL JUEGO
-    */
+    /* INTERFAZ MÓVIL */
+
+    window.EJS_browserMode =
+        "mobile";
+
+
+    /* NOMBRE */
 
     window.EJS_gameName =
         "pokemon-azul";
 
 
-    /*
-    ID ÚNICO
+    /* ID */
 
-    Amarillo = 1001
-    Azul     = 1002
-    Verde    = 1003
-    */
-
-    window.EJS_gameID = 1002;
+    window.EJS_gameID =
+        1002;
 
 
-    /*
-    ROM
-
-    El archivo debe llamarse exactamente:
-    juego.gba
-    */
+    /* ROM */
 
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
 
-    /*
-    EMULATORJS
-    */
+    /* EMULATORJS */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
-    /*
-    NO ARRANCA HASTA TOCAR
-    INICIAR JUEGO
-    */
+    /* BOTÓN INICIAL */
 
     window.EJS_startOnLoaded =
         false;
 
 
-    /*
-    TEXTO DEL BOTÓN
-    */
-
     window.EJS_startButtonName =
         "INICIAR JUEGO";
 
-
-    /*
-    BOTÓN CENTRADO
-    */
 
     window.EJS_alignStartButton =
         "center";
 
 
-    /*
-    COLOR AZUL
-    */
+    /* COLOR AZUL */
 
     window.EJS_color =
         "#2196f3";
 
 
-    /*
-    FONDO NEGRO
-    */
+    /* FONDO */
 
     window.EJS_backgroundColor =
         "#000000";
 
 
-    /*
-    GUARDADO PERIÓDICO
-    */
+    /* GUARDADO */
 
     window.EJS_fixedSaveInterval =
         7000;
 
-
-    /*
-    GUARDADOS EN EL NAVEGADOR
-
-    Ya NO ponemos opciones de Super Game Boy
-    porque esto ahora es un juego de GBA.
-    */
 
     window.EJS_defaultOptions = {
 
@@ -229,21 +368,38 @@
 
 
     /*
-    CUANDO ARRANQUE EL JUEGO,
-    QUITAMOS EL TÍTULO.
+    =========================================
+    AL INICIAR EL JUEGO
+    =========================================
     */
 
     window.EJS_onGameStart =
         function () {
+
 
             const titulo =
                 document.getElementById(
                     "tituloPokemon"
                 );
 
+
+            const blastoise =
+                document.getElementById(
+                    "blastoiseInicio"
+                );
+
+
             if (titulo) {
 
                 titulo.style.display =
+                    "none";
+
+            }
+
+
+            if (blastoise) {
+
+                blastoise.style.display =
                     "none";
 
             }
