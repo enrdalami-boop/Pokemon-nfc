@@ -25,7 +25,6 @@
 
         html,
         body {
-
             margin: 0;
             padding: 0;
 
@@ -43,8 +42,11 @@
         }
 
 
-        #game {
+        /* =========================
+           EMULADOR
+        ========================== */
 
+        #game {
             width: 100vw;
             height: 100dvh;
 
@@ -73,6 +75,8 @@
         }
 
 
+        /* POKÉMON */
+
         #tituloPokemon .pokemon {
 
             margin: 0;
@@ -93,6 +97,8 @@
         }
 
 
+        /* ROJO FUEGO */
+
         #tituloPokemon .rojoFuego {
 
             margin: 8px 0 0 0;
@@ -112,6 +118,8 @@
                 5px 5px 10px #000;
         }
 
+
+        /* EDICIÓN ROJO FUEGO */
 
         #tituloPokemon p {
 
@@ -163,7 +171,6 @@
         @media (max-width: 600px) {
 
             #tituloPokemon {
-
                 top: 6%;
             }
 
@@ -204,22 +211,23 @@
         }
 
 
+        /* =========================
+           PANTALLAS BAJAS
+        ========================== */
+
         @media (max-height: 700px) {
 
             #tituloPokemon {
-
                 top: 4%;
             }
 
 
             #tituloPokemon .pokemon {
-
                 font-size: 31px;
             }
 
 
             #tituloPokemon .rojoFuego {
-
                 font-size: 34px;
             }
 
@@ -249,7 +257,9 @@
 <body>
 
 
-<!-- PORTADA -->
+<!-- =========================
+     PORTADA
+========================== -->
 
 <div id="tituloPokemon">
 
@@ -268,12 +278,20 @@
 </div>
 
 
+<!-- =========================
+     CHARIZARD
+========================== -->
+
 <img
     id="charizardInicio"
     src="./charizard.png"
     alt="Charizard"
 >
 
+
+<!-- =========================
+     EMULADOR
+========================== -->
 
 <div id="game"></div>
 
@@ -282,6 +300,7 @@
 
 
     /* =========================
+       CONFIGURACIÓN
        EMULATORJS
     ========================== */
 
@@ -344,6 +363,7 @@
 
         "virtual-gamepad":
             "enabled"
+
     };
 
 
@@ -353,9 +373,13 @@
 
     window.EJS_VirtualGamepadSettings = [
 
-        /* CRUCETA */
+
+        /* =====================
+           CRUCETA
+        ===================== */
 
         {
+
             type: "dpad",
 
             location: "left",
@@ -372,12 +396,16 @@
                 6,
                 7
             ]
+
         },
 
 
-        /* BOTÓN B */
+        /* =====================
+           BOTÓN B
+        ===================== */
 
         {
+
             type: "button",
 
             text: "B",
@@ -395,12 +423,16 @@
             fontSize: 30,
 
             input_value: 0
+
         },
 
 
-        /* BOTÓN A */
+        /* =====================
+           BOTÓN A
+        ===================== */
 
         {
+
             type: "button",
 
             text: "A",
@@ -418,12 +450,16 @@
             fontSize: 30,
 
             input_value: 8
+
         },
 
 
-        /* BOTÓN L */
+        /* =====================
+           BOTÓN L
+        ===================== */
 
         {
+
             type: "button",
 
             text: "L",
@@ -441,12 +477,16 @@
             fontSize: 25,
 
             input_value: 10
+
         },
 
 
-        /* BOTÓN R */
+        /* =====================
+           BOTÓN R
+        ===================== */
 
         {
+
             type: "button",
 
             text: "R",
@@ -464,12 +504,19 @@
             fontSize: 25,
 
             input_value: 11
+
         },
 
 
-        /* SELECT */
+        /* =====================
+           SELECT
+
+           Más arriba y alejado
+           de la cruceta
+        ===================== */
 
         {
+
             type: "button",
 
             text: "SELECT",
@@ -478,9 +525,9 @@
 
             location: "center",
 
-            left: -90,
+            left: -20,
 
-            top: -145,
+            top: -220,
 
             bold: true,
 
@@ -489,12 +536,18 @@
             block: true,
 
             input_value: 2
+
         },
 
 
-        /* START */
+        /* =====================
+           START
+
+           Más arriba y centrado
+        ===================== */
 
         {
+
             type: "button",
 
             text: "START",
@@ -503,9 +556,9 @@
 
             location: "center",
 
-            left: 15,
+            left: 90,
 
-            top: -145,
+            top: -220,
 
             bold: true,
 
@@ -514,6 +567,7 @@
             block: true,
 
             input_value: 3
+
         }
 
     ];
