@@ -26,14 +26,20 @@
             overflow: hidden;
         }
 
+
         #game {
             width: 100%;
             height: 100%;
         }
 
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
         #tituloPokemon {
             position: fixed;
-            top: 12%;
+            top: 6%;
             left: 0;
             width: 100%;
             z-index: 9999;
@@ -42,24 +48,151 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        #tituloPokemon h1 {
+
+        /* POKÉMON */
+
+        #tituloPokemon .pokemon {
             margin: 0;
-            color: #39b54a;
-            font-size: 34px;
+
+            color: #ffffff;
+
+            font-size: 40px;
             font-weight: 900;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            line-height: 1;
+
+            text-shadow:
+                2px 2px 0 #39b54a,
+                4px 4px 8px #000;
+        }
+
+
+        /* VERDE */
+
+        #tituloPokemon .verde {
+            margin: 8px 0 0 0;
+
+            color: #39b54a;
+
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            line-height: 1;
 
             text-shadow:
                 2px 2px 0 #ffffff,
                 4px 4px 8px #000;
         }
 
+
+        /* EDICIÓN VERDE */
+
         #tituloPokemon p {
-            margin-top: 8px;
+            margin-top: 12px;
+
             color: white;
+
             font-size: 14px;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           VENUSAUR
+        ========================== */
+
+        #venusaurInicio {
+            position: fixed;
+
+            top: 25%;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 220px;
+            max-width: 58vw;
+            height: auto;
+
+            z-index: 9998;
+
+            pointer-events: none;
+
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+
+        /* =========================
+           MÓVIL
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            #tituloPokemon {
+                top: 6%;
+            }
+
+
+            #tituloPokemon .pokemon {
+                font-size: 36px;
+                letter-spacing: 3px;
+            }
+
+
+            #tituloPokemon .verde {
+                font-size: 39px;
+                letter-spacing: 2px;
+            }
+
+
+            #tituloPokemon p {
+                font-size: 13px;
+                margin-top: 10px;
+            }
+
+
+            #venusaurInicio {
+                top: 25%;
+                width: 205px;
+                max-width: 58vw;
+            }
+
+        }
+
+
+        /* =========================
+           PANTALLAS BAJAS
+        ========================== */
+
+        @media (max-height: 700px) {
+
+            #tituloPokemon {
+                top: 4%;
+            }
+
+
+            #tituloPokemon .pokemon {
+                font-size: 31px;
+            }
+
+
+            #tituloPokemon .verde {
+                font-size: 34px;
+            }
+
+
+            #tituloPokemon p {
+                font-size: 11px;
+                margin-top: 8px;
+            }
+
+
+            #venusaurInicio {
+                top: 24%;
+                width: 175px;
+            }
+
         }
 
     </style>
@@ -69,14 +202,41 @@
 <body>
 
 
+<!-- =========================
+     PORTADA
+========================== -->
+
 <div id="tituloPokemon">
 
-    <h1>POKÉMON VERDE</h1>
+    <h1 class="pokemon">
+        POKÉMON
+    </h1>
 
-    <p>EDICIÓN VERDE</p>
+    <h1 class="verde">
+        VERDE
+    </h1>
+
+    <p>
+        EDICIÓN VERDE
+    </p>
 
 </div>
 
+
+<!-- =========================
+     VENUSAUR
+========================== -->
+
+<img
+    id="venusaurInicio"
+    src="./venusaur.png"
+    alt="Venusaur"
+>
+
+
+<!-- =========================
+     EMULADOR
+========================== -->
 
 <div id="game"></div>
 
@@ -117,6 +277,11 @@
         "save-state-location": "browser"
     };
 
+
+    /* =========================
+       AL INICIAR EL JUEGO
+    ========================== */
+
     window.EJS_onGameStart =
         function () {
 
@@ -125,8 +290,19 @@
                     "tituloPokemon"
                 );
 
+            const venusaur =
+                document.getElementById(
+                    "venusaurInicio"
+                );
+
+
             if (titulo) {
                 titulo.style.display = "none";
+            }
+
+
+            if (venusaur) {
+                venusaur.style.display = "none";
             }
 
         };
