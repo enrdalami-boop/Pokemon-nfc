@@ -99,15 +99,15 @@
 
             position: fixed;
 
+            top: 36%;
             left: 50%;
-            top: 49%;
 
             transform:
                 translate(-50%, -50%);
 
-            width: 260px;
+            width: 230px;
 
-            max-width: 65vw;
+            max-width: 60vw;
 
             height: auto;
 
@@ -127,7 +127,7 @@
         @media (max-width: 600px) {
 
             #tituloPokemon {
-                top: 6%;
+                top: 5%;
             }
 
 
@@ -151,11 +151,11 @@
 
             #blastoiseInicio {
 
-                top: 49%;
+                top: 36%;
 
-                width: 245px;
+                width: 220px;
 
-                max-width: 65vw;
+                max-width: 60vw;
             }
 
         }
@@ -190,9 +190,9 @@
 
             #blastoiseInicio {
 
-                top: 48%;
+                top: 35%;
 
-                width: 220px;
+                width: 195px;
             }
 
         }
@@ -240,61 +240,43 @@
 
 <script>
 
-    window.EJS_player =
-        "#game";
+    window.EJS_player = "#game";
 
+    window.EJS_core = "gba";
 
-    window.EJS_core =
-        "gba";
+    window.EJS_controlScheme = "gba";
 
-
-    window.EJS_controlScheme =
-        "gba";
-
-
-    window.EJS_browserMode =
-        "mobile";
-
+    window.EJS_browserMode = "mobile";
 
     window.EJS_gameName =
         "pokemon-azul";
 
-
     window.EJS_gameID =
         1002;
-
 
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
-
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
-
 
     window.EJS_startOnLoaded =
         false;
 
-
     window.EJS_startButtonName =
         "INICIAR JUEGO";
-
 
     window.EJS_alignStartButton =
         "center";
 
-
     window.EJS_color =
         "#2196f3";
-
 
     window.EJS_backgroundColor =
         "#000000";
 
-
     window.EJS_fixedSaveInterval =
         7000;
-
 
     window.EJS_defaultOptions = {
 
@@ -307,12 +289,10 @@
     window.EJS_onGameStart =
         function () {
 
-
             const titulo =
                 document.getElementById(
                     "tituloPokemon"
                 );
-
 
             const blastoise =
                 document.getElementById(
@@ -321,18 +301,14 @@
 
 
             if (titulo) {
-
                 titulo.style.display =
                     "none";
-
             }
 
 
             if (blastoise) {
-
                 blastoise.style.display =
                     "none";
-
             }
 
         };
