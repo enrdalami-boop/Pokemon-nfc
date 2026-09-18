@@ -100,6 +100,7 @@
 
         /* =========================
            BLASTOISE
+           140 % DEL TAMAÑO ANTERIOR
         ========================== */
 
         #blastoiseInicio {
@@ -111,8 +112,8 @@
             transform:
                 translate(-50%, -50%);
 
-            width: 220px;
-            max-width: 58vw;
+            width: 308px;
+            max-width: 80vw;
             height: auto;
 
             pointer-events: none;
@@ -144,7 +145,6 @@
                 white;
 
             border: none;
-
             border-radius: 30px;
 
             padding:
@@ -191,9 +191,7 @@
             width: 90%;
 
             color: white;
-
             font-size: 13px;
-
             min-height: 18px;
         }
 
@@ -229,8 +227,8 @@
 
             #blastoiseInicio {
                 top: 39%;
-                width: 205px;
-                max-width: 58vw;
+                width: 287px;
+                max-width: 80vw;
             }
 
 
@@ -278,7 +276,8 @@
 
             #blastoiseInicio {
                 top: 37%;
-                width: 180px;
+                width: 252px;
+                max-width: 78vw;
             }
 
 
@@ -354,81 +353,49 @@
 
 <script>
 
-    /*
-    =========================================
-    POKÉMON AZUL
-    =========================================
-    */
-
-
     window.EJS_player =
         "#game";
 
-
-    /* GAME BOY ADVANCE */
 
     window.EJS_core =
         "gba";
 
 
-    /* CONTROLES GBA */
-
     window.EJS_controlScheme =
         "gba";
 
-
-    /* INTERFAZ MÓVIL */
 
     window.EJS_browserMode =
         "mobile";
 
 
-    /* NOMBRE */
-
     window.EJS_gameName =
         "pokemon-azul";
 
-
-    /* ID */
 
     window.EJS_gameID =
         1002;
 
 
-    /* ROM */
-
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
-
-    /* EMULATORJS */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
-    /*
-    Arranca al cargar EmulatorJS
-    después de pulsar el botón.
-    */
-
     window.EJS_startOnLoaded =
         true;
 
-
-    /* COLOR */
 
     window.EJS_color =
         "#2196f3";
 
 
-    /* FONDO */
-
     window.EJS_backgroundColor =
         "#000000";
 
-
-    /* GUARDADO */
 
     window.EJS_fixedSaveInterval =
         7000;
@@ -441,12 +408,6 @@
 
     };
 
-
-    /*
-    =========================================
-    PORTADA
-    =========================================
-    */
 
     const boton =
         document.getElementById(
@@ -465,12 +426,6 @@
             "inicio"
         );
 
-
-    /*
-    =========================================
-    AL PULSAR INICIAR
-    =========================================
-    */
 
     boton.addEventListener(
 
@@ -504,17 +459,14 @@
             script.onload =
                 function () {
 
-
                     pantallaInicio.style.display =
                         "none";
-
 
                 };
 
 
             script.onerror =
                 function () {
-
 
                     boton.disabled =
                         false;
@@ -527,14 +479,12 @@
                     estado.textContent =
                         "No se pudo cargar el emulador. Comprueba la conexión.";
 
-
                 };
 
 
             document.body.appendChild(
                 script
             );
-
 
         }
 
