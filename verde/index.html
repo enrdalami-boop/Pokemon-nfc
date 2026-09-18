@@ -205,7 +205,7 @@
 
 
         /* =========================
-           PANTALLAS PEQUEÑAS
+           PANTALLAS BAJAS
         ========================== */
 
         @media (max-height: 700px) {
@@ -274,7 +274,6 @@
 </div>
 
 
-
 <!-- =========================
      VENUSAUR
 ========================== -->
@@ -284,7 +283,6 @@
     src="./venusaur.png"
     alt="Venusaur"
 >
-
 
 
 <!-- =========================
@@ -306,90 +304,82 @@
         "#game";
 
 
-    /* Game Boy Advance / mGBA */
-
     window.EJS_core =
         "gba";
 
-
-    /* Nombre del juego */
 
     window.EJS_gameName =
         "pokemon-verde";
 
 
     /*
-       ID NUEVO:
-       evita reutilizar datos
-       anteriores del juego.
+       ID LIMPIO PARA VERDE
     */
 
     window.EJS_gameID =
         2003;
 
 
-    /* Archivo del juego */
-
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
-
-    /* EmulatorJS 4.2.3 */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
-    /* =========================
-       IMPORTANTE:
-       NO reutilizar ajustes
-       anteriores del emulador
-    ========================== */
+    /*
+       Evita que queden guardados
+       ajustes de velocidad antiguos.
+    */
 
     window.EJS_disableLocalStorage =
         true;
 
 
     /* =========================
-       AJUSTES DE VELOCIDAD
+       VELOCIDAD
     ========================== */
 
     window.EJS_defaultOptions = {
 
-        "save-state-location":
-            "browser",
-
-        "slowMotion":
-            "disabled",
+        /*
+           Velocidad normal al abrir
+        */
 
         "fastForward":
             "disabled",
 
-        "shader":
-            "disabled"
+        "slowMotion":
+            "disabled",
+
+
+        /*
+           Cuando pulses RÁPIDO:
+           2 veces la velocidad normal.
+        */
+
+        "ff-ratio":
+            "2.0",
+
+
+        /*
+           Cuando pulses LENTO:
+           divide la velocidad entre 2.
+        */
+
+        "sm-ratio":
+            "2.0",
+
+
+        /*
+           Guardado
+        */
+
+        "save-state-location":
+            "browser"
 
     };
-
-
-    /*
-       Ocultamos los ajustes
-       que podrían modificar
-       accidentalmente la velocidad.
-    */
-
-    window.EJS_hideSettings = [
-
-        "slowMotion",
-
-        "sm-ratio",
-
-        "fastForward",
-
-        "ff-ratio",
-
-        "shader"
-
-    ];
 
 
     /* =========================
@@ -408,13 +398,9 @@
         "center";
 
 
-    /* Color verde */
-
     window.EJS_color =
         "#39b54a";
 
-
-    /* Fondo */
 
     window.EJS_backgroundColor =
         "#000000";
