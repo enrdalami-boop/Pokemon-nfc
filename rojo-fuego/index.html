@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -11,31 +10,24 @@
                    maximum-scale=1.0,
                    user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Pokémon Rojo Fuego</title>
-
 
     <style>
 
         html,
         body {
-
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
-
             background: #000;
-
             overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-
         #game {
-
             width: 100%;
             height: 100%;
         }
@@ -45,42 +37,36 @@
            PORTADA
         ========================== */
 
-        #tituloPokemon {
-
+        #inicio {
             position: fixed;
-
-            top: 7%;
-            left: 0;
-
-            width: 100%;
-
+            inset: 0;
             z-index: 9999;
-
+            background: #000;
             text-align: center;
-
-            pointer-events: none;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            overflow: hidden;
         }
 
 
-        /* POKÉMON */
+        /* =========================
+           TÍTULO
+        ========================== */
+
+        #tituloPokemon {
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+        }
+
 
         #tituloPokemon .pokemon {
-
             margin: 0;
-
             color: #ffffff;
-
             font-size: 40px;
-
             font-weight: 900;
-
             letter-spacing: 4px;
-
             line-height: 1;
 
             text-shadow:
@@ -89,20 +75,12 @@
         }
 
 
-        /* ROJO FUEGO */
-
         #tituloPokemon .rojoFuego {
-
             margin: 8px 0 0 0;
-
             color: #ef3e3a;
-
             font-size: 44px;
-
             font-weight: 900;
-
             letter-spacing: 3px;
-
             line-height: 1;
 
             text-shadow:
@@ -111,18 +89,11 @@
         }
 
 
-        /* EDICIÓN */
-
         #tituloPokemon p {
-
             margin-top: 12px;
-
             color: white;
-
             font-size: 14px;
-
             font-weight: bold;
-
             letter-spacing: 2px;
         }
 
@@ -132,27 +103,98 @@
         ========================== */
 
         #charizardInicio {
+            position: absolute;
 
-            position: fixed;
-
-            top: 27%;
+            top: 39%;
             left: 50%;
 
             transform:
-                translateX(-50%);
+                translate(-50%, -50%);
 
-            width: 170px;
-
-            max-width: 45vw;
-
+            width: 220px;
+            max-width: 58vw;
             height: auto;
-
-            z-index: 9998;
 
             pointer-events: none;
 
             image-rendering: pixelated;
             image-rendering: crisp-edges;
+        }
+
+
+        /* =========================
+           BOTÓN INICIAR
+        ========================== */
+
+        #iniciar {
+            position: absolute;
+
+            top: 67%;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            min-width: 220px;
+
+            background:
+                #ef3e3a;
+
+            color:
+                white;
+
+            border: none;
+
+            border-radius: 30px;
+
+            padding:
+                14px 30px;
+
+            font-size: 18px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 12px rgba(0,0,0,0.5);
+
+            white-space: nowrap;
+        }
+
+
+        #iniciar:active {
+            transform:
+                translateX(-50%)
+                scale(0.97);
+        }
+
+
+        #iniciar:disabled {
+            opacity: 0.7;
+            cursor: default;
+        }
+
+
+        /* =========================
+           ESTADO
+        ========================== */
+
+        #estado {
+            position: absolute;
+
+            top: 77%;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 90%;
+
+            color: white;
+
+            font-size: 13px;
+
+            min-height: 18px;
         }
 
 
@@ -163,42 +205,92 @@
         @media (max-width: 600px) {
 
             #tituloPokemon {
-
-                top: 6%;
+                top: 5%;
             }
 
 
             #tituloPokemon .pokemon {
-
                 font-size: 36px;
-
                 letter-spacing: 3px;
             }
 
 
             #tituloPokemon .rojoFuego {
-
                 font-size: 39px;
-
                 letter-spacing: 2px;
             }
 
 
             #tituloPokemon p {
-
                 font-size: 13px;
-
                 margin-top: 10px;
             }
 
 
             #charizardInicio {
+                top: 39%;
+                width: 205px;
+                max-width: 58vw;
+            }
 
-                top: 27%;
 
-                width: 165px;
+            #iniciar {
+                top: 67%;
+                min-width: 215px;
+                font-size: 17px;
+                padding: 13px 28px;
+            }
 
-                max-width: 45vw;
+
+            #estado {
+                top: 77%;
+            }
+
+        }
+
+
+        /* =========================
+           PANTALLAS BAJAS
+        ========================== */
+
+        @media (max-height: 700px) {
+
+            #tituloPokemon {
+                top: 3%;
+            }
+
+
+            #tituloPokemon .pokemon {
+                font-size: 31px;
+            }
+
+
+            #tituloPokemon .rojoFuego {
+                font-size: 34px;
+            }
+
+
+            #tituloPokemon p {
+                font-size: 11px;
+                margin-top: 7px;
+            }
+
+
+            #charizardInicio {
+                top: 37%;
+                width: 180px;
+            }
+
+
+            #iniciar {
+                top: 64%;
+                font-size: 15px;
+                padding: 11px 24px;
+            }
+
+
+            #estado {
+                top: 74%;
             }
 
         }
@@ -211,106 +303,132 @@
 <body>
 
 
-<!-- =========================
-     PORTADA
-========================== -->
-
-<div id="tituloPokemon">
-
-    <h1 class="pokemon">
-        POKÉMON
-    </h1>
-
-    <h1 class="rojoFuego">
-        ROJO FUEGO
-    </h1>
-
-    <p>
-        EDICIÓN ROJO FUEGO
-    </p>
-
-</div>
-
-
-
-<!-- =========================
-     CHARIZARD
-========================== -->
-
-<img
-    id="charizardInicio"
-    src="./charizard.png"
-    alt="Charizard"
->
-
-
-
-<!-- =========================
-     EMULADOR
-========================== -->
+<!-- EMULADOR -->
 
 <div id="game"></div>
 
 
+<!-- PORTADA -->
+
+<div id="inicio">
+
+
+    <div id="tituloPokemon">
+
+        <h1 class="pokemon">
+            POKÉMON
+        </h1>
+
+        <h1 class="rojoFuego">
+            ROJO FUEGO
+        </h1>
+
+        <p>
+            EDICIÓN ROJO FUEGO
+        </p>
+
+    </div>
+
+
+    <!-- CHARIZARD -->
+
+    <img
+        id="charizardInicio"
+        src="./charizard.png"
+        alt="Charizard"
+    >
+
+
+    <!-- BOTÓN -->
+
+    <button id="iniciar">
+        INICIAR JUEGO
+    </button>
+
+
+    <div id="estado"></div>
+
+
+</div>
+
 
 <script>
 
+    /*
+    =========================================
+    POKÉMON ROJO FUEGO
+    =========================================
+    */
 
-    /* =========================
-       EMULATORJS
-    ========================== */
 
     window.EJS_player =
         "#game";
 
 
+    /* GAME BOY ADVANCE */
+
     window.EJS_core =
         "gba";
 
+
+    /* CONTROLES GBA */
+
+    window.EJS_controlScheme =
+        "gba";
+
+
+    /* INTERFAZ MÓVIL */
+
+    window.EJS_browserMode =
+        "mobile";
+
+
+    /* NOMBRE */
 
     window.EJS_gameName =
         "pokemon-rojo-fuego";
 
 
-    /*
-       IMPORTANTE:
-
-       NUEVO ID para borrar de golpe
-       la configuración antigua
-       del mando de Rojo Fuego.
-    */
+    /* ID */
 
     window.EJS_gameID =
         2004;
 
 
+    /* ROM */
+
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
+
+    /* EMULATORJS */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
+    /*
+    Arranca al cargar EmulatorJS
+    después de pulsar el botón.
+    */
+
     window.EJS_startOnLoaded =
-        false;
+        true;
 
 
-    window.EJS_startButtonName =
-        "INICIAR JUEGO";
-
-
-    window.EJS_alignStartButton =
-        "center";
-
+    /* COLOR */
 
     window.EJS_color =
         "#ef3e3a";
 
 
+    /* FONDO */
+
     window.EJS_backgroundColor =
         "#000000";
 
+
+    /* GUARDADO */
 
     window.EJS_fixedSaveInterval =
         7000;
@@ -324,49 +442,105 @@
     };
 
 
-    /* =========================
-       AL INICIAR EL JUEGO
-    ========================== */
+    /*
+    =========================================
+    PORTADA
+    =========================================
+    */
 
-    window.EJS_onGameStart =
+    const boton =
+        document.getElementById(
+            "iniciar"
+        );
+
+
+    const estado =
+        document.getElementById(
+            "estado"
+        );
+
+
+    const pantallaInicio =
+        document.getElementById(
+            "inicio"
+        );
+
+
+    /*
+    =========================================
+    AL PULSAR INICIAR
+    =========================================
+    */
+
+    boton.addEventListener(
+
+        "click",
+
         function () {
 
 
-            const titulo =
-                document.getElementById(
-                    "tituloPokemon"
+            boton.disabled =
+                true;
+
+
+            boton.textContent =
+                "CARGANDO...";
+
+
+            estado.textContent =
+                "Preparando Pokémon Rojo Fuego...";
+
+
+            const script =
+                document.createElement(
+                    "script"
                 );
 
 
-            const charizard =
-                document.getElementById(
-                    "charizardInicio"
-                );
+            script.src =
+                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
 
 
-            if (titulo) {
-
-                titulo.style.display =
-                    "none";
-
-            }
+            script.onload =
+                function () {
 
 
-            if (charizard) {
-
-                charizard.style.display =
-                    "none";
-
-            }
-
-        };
+                    pantallaInicio.style.display =
+                        "none";
 
 
-</script>
+                };
 
 
-<script
-    src="https://cdn.emulatorjs.org/4.2.3/data/loader.js">
+            script.onerror =
+                function () {
+
+
+                    boton.disabled =
+                        false;
+
+
+                    boton.textContent =
+                        "REINTENTAR";
+
+
+                    estado.textContent =
+                        "No se pudo cargar el emulador. Comprueba la conexión.";
+
+
+                };
+
+
+            document.body.appendChild(
+                script
+            );
+
+
+        }
+
+    );
+
+
 </script>
 
 
