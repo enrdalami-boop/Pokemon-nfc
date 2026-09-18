@@ -2,24 +2,17 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width,
                    initial-scale=1.0,
                    maximum-scale=1.0,
-                   user-scalable=no,
-                   viewport-fit=cover">
+                   user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
-
-    <meta name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Pokémon Rojo Fuego</title>
-
 
     <style>
 
@@ -27,42 +20,28 @@
         body {
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
-
             background: #000;
-
             overflow: hidden;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
         }
 
-
-        /* =========================
-           EMULADOR
-        ========================== */
 
         #game {
-            width: 100vw;
-            height: 100dvh;
-
-            background: #000;
+            width: 100%;
+            height: 100%;
         }
 
 
         /* =========================
-           PORTADA
+           TÍTULO
         ========================== */
 
         #tituloPokemon {
 
             position: fixed;
 
-            top: 6%;
+            top: 7%;
             left: 0;
 
             width: 100%;
@@ -72,6 +51,11 @@
             text-align: center;
 
             pointer-events: none;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
 
 
@@ -83,7 +67,7 @@
 
             color: #ffffff;
 
-            font-size: 44px;
+            font-size: 40px;
 
             font-weight: 900;
 
@@ -92,8 +76,8 @@
             line-height: 1;
 
             text-shadow:
-                3px 3px 0 #e53935,
-                5px 5px 10px #000;
+                2px 2px 0 #ef3e3a,
+                4px 4px 8px #000;
         }
 
 
@@ -103,9 +87,9 @@
 
             margin: 8px 0 0 0;
 
-            color: #f44336;
+            color: #ef3e3a;
 
-            font-size: 48px;
+            font-size: 44px;
 
             font-weight: 900;
 
@@ -115,7 +99,7 @@
 
             text-shadow:
                 2px 2px 0 #ffffff,
-                5px 5px 10px #000;
+                4px 4px 8px #000;
         }
 
 
@@ -123,11 +107,11 @@
 
         #tituloPokemon p {
 
-            margin-top: 14px;
+            margin-top: 12px;
 
-            color: #ffffff;
+            color: white;
 
-            font-size: 15px;
+            font-size: 14px;
 
             font-weight: bold;
 
@@ -144,6 +128,7 @@
             position: fixed;
 
             top: 27%;
+
             left: 50%;
 
             transform:
@@ -171,6 +156,7 @@
         @media (max-width: 600px) {
 
             #tituloPokemon {
+
                 top: 6%;
             }
 
@@ -210,45 +196,6 @@
 
         }
 
-
-        /* =========================
-           PANTALLAS BAJAS
-        ========================== */
-
-        @media (max-height: 700px) {
-
-            #tituloPokemon {
-                top: 4%;
-            }
-
-
-            #tituloPokemon .pokemon {
-                font-size: 31px;
-            }
-
-
-            #tituloPokemon .rojoFuego {
-                font-size: 34px;
-            }
-
-
-            #tituloPokemon p {
-
-                font-size: 11px;
-
-                margin-top: 8px;
-            }
-
-
-            #charizardInicio {
-
-                top: 25%;
-
-                width: 140px;
-            }
-
-        }
-
     </style>
 
 </head>
@@ -278,9 +225,7 @@
 </div>
 
 
-<!-- =========================
-     CHARIZARD
-========================== -->
+<!-- CHARIZARD -->
 
 <img
     id="charizardInicio"
@@ -298,39 +243,41 @@
 
 <script>
 
-
-    /* =========================
-       CONFIGURACIÓN
-       EMULATORJS
-    ========================== */
-
     window.EJS_player =
         "#game";
 
+
+    /* GAME BOY ADVANCE */
 
     window.EJS_core =
         "gba";
 
 
-    window.EJS_controlScheme =
-        "gba";
-
+    /* NOMBRE */
 
     window.EJS_gameName =
         "pokemon-rojo-fuego";
 
 
+    /* ID DIFERENTE AL VERDE */
+
     window.EJS_gameID =
         1004;
 
+
+    /* ROM */
 
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
 
+    /* EMULATORJS */
+
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
+
+    /* BOTÓN INICIAL */
 
     window.EJS_startOnLoaded =
         false;
@@ -344,6 +291,8 @@
         "center";
 
 
+    /* COLOR ROJO */
+
     window.EJS_color =
         "#ef3e3a";
 
@@ -352,6 +301,8 @@
         "#000000";
 
 
+    /* GUARDADO AUTOMÁTICO */
+
     window.EJS_fixedSaveInterval =
         7000;
 
@@ -359,222 +310,13 @@
     window.EJS_defaultOptions = {
 
         "save-state-location":
-            "browser",
-
-        "virtual-gamepad":
-            "enabled"
+            "browser"
 
     };
 
 
     /* =========================
-       MANDO VIRTUAL GBA
-    ========================== */
-
-    window.EJS_VirtualGamepadSettings = [
-
-
-        /* =====================
-           CRUCETA
-        ===================== */
-
-        {
-
-            type: "dpad",
-
-            location: "left",
-
-            left: "50%",
-
-            right: "50%",
-
-            joystickInput: false,
-
-            inputValues: [
-                4,
-                5,
-                6,
-                7
-            ]
-
-        },
-
-
-        /* =====================
-           BOTÓN B
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "B",
-
-            id: "gba_b",
-
-            location: "right",
-
-            left: 0,
-
-            top: 40,
-
-            bold: true,
-
-            fontSize: 30,
-
-            input_value: 0
-
-        },
-
-
-        /* =====================
-           BOTÓN A
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "A",
-
-            id: "gba_a",
-
-            location: "right",
-
-            left: 85,
-
-            top: 0,
-
-            bold: true,
-
-            fontSize: 30,
-
-            input_value: 8
-
-        },
-
-
-        /* =====================
-           BOTÓN L
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "L",
-
-            id: "gba_l",
-
-            location: "left",
-
-            left: 0,
-
-            top: -100,
-
-            bold: true,
-
-            fontSize: 25,
-
-            input_value: 10
-
-        },
-
-
-        /* =====================
-           BOTÓN R
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "R",
-
-            id: "gba_r",
-
-            location: "right",
-
-            right: 0,
-
-            top: -100,
-
-            bold: true,
-
-            fontSize: 25,
-
-            input_value: 11
-
-        },
-
-
-        /* =====================
-           SELECT
-
-           Más arriba y alejado
-           de la cruceta
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "SELECT",
-
-            id: "gba_select",
-
-            location: "center",
-
-            left: -20,
-
-            top: -220,
-
-            bold: true,
-
-            fontSize: 13,
-
-            block: true,
-
-            input_value: 2
-
-        },
-
-
-        /* =====================
-           START
-
-           Más arriba y centrado
-        ===================== */
-
-        {
-
-            type: "button",
-
-            text: "START",
-
-            id: "gba_start",
-
-            location: "center",
-
-            left: 90,
-
-            top: -220,
-
-            bold: true,
-
-            fontSize: 13,
-
-            block: true,
-
-            input_value: 3
-
-        }
-
-    ];
-
-
-    /* =========================
-       AL INICIAR EL JUEGO
+       AL COMENZAR EL JUEGO
     ========================== */
 
     window.EJS_onGameStart =
@@ -609,7 +351,6 @@
             }
 
         };
-
 
 </script>
 
