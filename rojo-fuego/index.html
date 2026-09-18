@@ -2,43 +2,62 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width,
                    initial-scale=1.0,
                    maximum-scale=1.0,
-                   user-scalable=no">
+                   user-scalable=no,
+                   viewport-fit=cover">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
 
     <title>Pokémon Rojo Fuego</title>
+
 
     <style>
 
         html,
         body {
+
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
+
             background: #000;
+
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
 
-
-        /* EMULADOR */
 
         #game {
+
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
+
+            background: #000;
         }
 
 
-        /* TÍTULO */
+        /* =========================
+           PORTADA
+        ========================== */
 
         #tituloPokemon {
+
             position: fixed;
 
             top: 6%;
@@ -53,8 +72,6 @@
             pointer-events: none;
         }
 
-
-        /* POKÉMON */
 
         #tituloPokemon .pokemon {
 
@@ -76,8 +93,6 @@
         }
 
 
-        /* ROJO FUEGO */
-
         #tituloPokemon .rojoFuego {
 
             margin: 8px 0 0 0;
@@ -98,8 +113,6 @@
         }
 
 
-        /* EDICIÓN ROJO FUEGO */
-
         #tituloPokemon p {
 
             margin-top: 14px;
@@ -114,7 +127,9 @@
         }
 
 
-        /* CHARIZARD */
+        /* =========================
+           CHARIZARD
+        ========================== */
 
         #charizardInicio {
 
@@ -123,7 +138,8 @@
             top: 27%;
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
             width: 170px;
 
@@ -140,13 +156,17 @@
         }
 
 
-        /* MÓVILES */
+        /* =========================
+           MÓVIL
+        ========================== */
 
         @media (max-width: 600px) {
 
             #tituloPokemon {
+
                 top: 6%;
             }
+
 
             #tituloPokemon .pokemon {
 
@@ -155,12 +175,14 @@
                 letter-spacing: 3px;
             }
 
+
             #tituloPokemon .rojoFuego {
 
                 font-size: 39px;
 
                 letter-spacing: 2px;
             }
+
 
             #tituloPokemon p {
 
@@ -182,21 +204,25 @@
         }
 
 
-        /* MÓVILES CON PANTALLA BAJA */
-
         @media (max-height: 700px) {
 
             #tituloPokemon {
+
                 top: 4%;
             }
 
+
             #tituloPokemon .pokemon {
+
                 font-size: 31px;
             }
 
+
             #tituloPokemon .rojoFuego {
+
                 font-size: 34px;
             }
+
 
             #tituloPokemon p {
 
@@ -223,7 +249,7 @@
 <body>
 
 
-<!-- TÍTULO -->
+<!-- PORTADA -->
 
 <div id="tituloPokemon">
 
@@ -242,9 +268,6 @@
 </div>
 
 
-
-<!-- CHARIZARD -->
-
 <img
     id="charizardInicio"
     src="./charizard.png"
@@ -252,96 +275,253 @@
 >
 
 
-
-<!-- EMULADOR -->
-
 <div id="game"></div>
-
 
 
 <script>
 
-    window.EJS_player = "#game";
+
+    /* =========================
+       EMULATORJS
+    ========================== */
+
+    window.EJS_player =
+        "#game";
 
 
-    /* Game Boy Advance */
-
-    window.EJS_core = "gba";
-
-    window.EJS_controlScheme = "gba";
+    window.EJS_core =
+        "gba";
 
 
-    /* Nombre del juego */
+    window.EJS_controlScheme =
+        "gba";
+
 
     window.EJS_gameName =
         "pokemon-rojo-fuego";
 
 
-    /* ID independiente */
-
     window.EJS_gameID =
         1004;
 
-
-    /* ROM */
 
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
 
-    /* EmulatorJS */
-
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
-
-    /* Mostrar botón de inicio */
 
     window.EJS_startOnLoaded =
         false;
 
 
-    /* Texto del botón */
-
     window.EJS_startButtonName =
         "INICIAR JUEGO";
 
-
-    /* Botón centrado */
 
     window.EJS_alignStartButton =
         "center";
 
 
-    /* Color */
-
     window.EJS_color =
         "#ef3e3a";
 
-
-    /* Fondo */
 
     window.EJS_backgroundColor =
         "#000000";
 
 
-    /* Guardado automático */
-
     window.EJS_fixedSaveInterval =
         7000;
 
 
-    /* Guardar en navegador */
-
     window.EJS_defaultOptions = {
 
         "save-state-location":
-            "browser"
+            "browser",
 
+        "virtual-gamepad":
+            "enabled"
     };
 
 
-    /* AL INICIAR EL JUEGO */
+    /* =========================
+       MANDO VIRTUAL GBA
+    ========================== */
+
+    window.EJS_VirtualGamepadSettings = [
+
+        /* CRUCETA */
+
+        {
+            type: "dpad",
+
+            location: "left",
+
+            left: "50%",
+
+            right: "50%",
+
+            joystickInput: false,
+
+            inputValues: [
+                4,
+                5,
+                6,
+                7
+            ]
+        },
+
+
+        /* BOTÓN B */
+
+        {
+            type: "button",
+
+            text: "B",
+
+            id: "gba_b",
+
+            location: "right",
+
+            left: 0,
+
+            top: 40,
+
+            bold: true,
+
+            fontSize: 30,
+
+            input_value: 0
+        },
+
+
+        /* BOTÓN A */
+
+        {
+            type: "button",
+
+            text: "A",
+
+            id: "gba_a",
+
+            location: "right",
+
+            left: 85,
+
+            top: 0,
+
+            bold: true,
+
+            fontSize: 30,
+
+            input_value: 8
+        },
+
+
+        /* BOTÓN L */
+
+        {
+            type: "button",
+
+            text: "L",
+
+            id: "gba_l",
+
+            location: "left",
+
+            left: 0,
+
+            top: -100,
+
+            bold: true,
+
+            fontSize: 25,
+
+            input_value: 10
+        },
+
+
+        /* BOTÓN R */
+
+        {
+            type: "button",
+
+            text: "R",
+
+            id: "gba_r",
+
+            location: "right",
+
+            right: 0,
+
+            top: -100,
+
+            bold: true,
+
+            fontSize: 25,
+
+            input_value: 11
+        },
+
+
+        /* SELECT */
+
+        {
+            type: "button",
+
+            text: "SELECT",
+
+            id: "gba_select",
+
+            location: "center",
+
+            left: -90,
+
+            top: -145,
+
+            bold: true,
+
+            fontSize: 13,
+
+            block: true,
+
+            input_value: 2
+        },
+
+
+        /* START */
+
+        {
+            type: "button",
+
+            text: "START",
+
+            id: "gba_start",
+
+            location: "center",
+
+            left: 15,
+
+            top: -145,
+
+            bold: true,
+
+            fontSize: 13,
+
+            block: true,
+
+            input_value: 3
+        }
+
+    ];
+
+
+    /* =========================
+       AL INICIAR EL JUEGO
+    ========================== */
 
     window.EJS_onGameStart =
         function () {
@@ -375,6 +555,7 @@
             }
 
         };
+
 
 </script>
 
