@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -10,124 +11,413 @@
                    maximum-scale=1.0,
                    user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
 
     <title>Pokémon Amarillo</title>
+
 
     <link rel="preload"
           href="./roms/juego.gb"
           as="fetch">
 
+
     <style>
 
-        html, body {
+        html,
+        body {
+
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
+
             background: #000;
+
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
+
+
+        /* =========================
+           EMULADOR
+        ========================== */
 
         #game {
+
             width: 100%;
             height: 100%;
         }
 
+
+        /* =========================
+           PANTALLA DE INICIO
+        ========================== */
+
         #inicio {
+
             position: fixed;
+
             inset: 0;
+
             z-index: 9999;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #333 0%,
-                    #111 55%,
-                    #000 100%
-                );
+            background: #000;
 
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+
+            overflow: hidden;
         }
 
-        #titulo {
-            color: #ffdc00;
-            font-size: 36px;
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
+        #tituloPokemon {
+
+            position: absolute;
+
+            top: 5%;
+
+            left: 0;
+
+            width: 100%;
+
+            text-align: center;
+
+            pointer-events: none;
+        }
+
+
+        /* POKÉMON */
+
+        #tituloPokemon .pokemon {
+
+            margin: 0;
+
+            color: #ffffff;
+
+            font-size: 40px;
+
             font-weight: 900;
-            margin: 0 0 8px 0;
-            letter-spacing: 2px;
+
+            letter-spacing: 4px;
+
+            line-height: 1;
 
             text-shadow:
-                2px 2px 0 #1d4fa3,
-                4px 4px 8px rgba(0,0,0,0.8);
+                2px 2px 0 #ffdc00,
+                4px 4px 8px #000;
         }
 
-        #subtitulo {
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 35px;
-            opacity: 0.9;
-        }
 
-        #iniciar {
-            background: #ffdc00;
-            color: #111;
+        /* AMARILLO */
 
-            border: none;
-            border-radius: 14px;
+        #tituloPokemon .amarillo {
 
-            padding: 18px 34px;
+            margin: 8px 0 0 0;
 
-            font-size: 20px;
+            color: #ffdc00;
+
+            font-size: 44px;
+
             font-weight: 900;
 
-            cursor: pointer;
+            letter-spacing: 3px;
+
+            line-height: 1;
+
+            text-shadow:
+                2px 2px 0 #ffffff,
+                4px 4px 8px #000;
+        }
+
+
+        /* EDICIÓN */
+
+        #tituloPokemon p {
+
+            margin-top: 12px;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           PIKACHU
+        ========================== */
+
+        #pikachuInicio {
+
+            position: absolute;
+
+            top: 36%;
+
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: 220px;
+
+            max-width: 58vw;
+
+            height: auto;
+
+            pointer-events: none;
+
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+
+        /* =========================
+           BOTÓN INICIAR
+        ========================== */
+
+        #iniciar {
+
+            position: absolute;
+
+            top: 64%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            min-width: 220px;
+
+            background:
+                #ffdc00;
+
+            color:
+                #111;
+
+            border: none;
+
+            border-radius: 30px;
+
+            padding:
+                14px 30px;
+
+            font-size:
+                18px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
 
             box-shadow:
-                0 6px 0 #c9a900,
-                0 10px 20px rgba(0,0,0,0.45);
+                0 5px 12px
+                rgba(0,0,0,0.5);
 
-            transition:
-                transform 0.1s ease,
-                box-shadow 0.1s ease;
+            white-space:
+                nowrap;
         }
+
 
         #iniciar:active {
-            transform: translateY(4px);
 
-            box-shadow:
-                0 2px 0 #c9a900,
-                0 5px 10px rgba(0,0,0,0.45);
+            transform:
+                translateX(-50%)
+                scale(0.97);
         }
 
+
         #iniciar:disabled {
+
             opacity: 0.7;
+
             cursor: default;
         }
 
+
+        /* =========================
+           ESTADO
+        ========================== */
+
         #estado {
-            margin-top: 22px;
+
+            position: absolute;
+
+            top: 74%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 90%;
+
             color: white;
-            font-size: 14px;
-            min-height: 20px;
+
+            font-size: 13px;
+
+            min-height: 18px;
         }
 
+
+        /* =========================
+           AVISO
+        ========================== */
+
         #aviso {
+
+            position: absolute;
+
+            bottom: 6%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 85%;
+
+            max-width: 320px;
+
             color: #aaa;
-            font-size: 12px;
-            margin-top: 20px;
-            max-width: 300px;
+
+            font-size: 11px;
+
             line-height: 1.4;
+        }
+
+
+        /* =========================
+           MÓVILES
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            #tituloPokemon {
+
+                top: 5%;
+            }
+
+
+            #tituloPokemon .pokemon {
+
+                font-size: 36px;
+
+                letter-spacing: 3px;
+            }
+
+
+            #tituloPokemon .amarillo {
+
+                font-size: 39px;
+
+                letter-spacing: 2px;
+            }
+
+
+            #tituloPokemon p {
+
+                font-size: 13px;
+
+                margin-top: 10px;
+            }
+
+
+            #pikachuInicio {
+
+                top: 36%;
+
+                width: 200px;
+
+                max-width: 58vw;
+            }
+
+
+            #iniciar {
+
+                top: 64%;
+
+                min-width: 215px;
+
+                font-size: 17px;
+
+                padding:
+                    13px 28px;
+            }
+
+        }
+
+
+        /* =========================
+           PANTALLAS BAJAS
+        ========================== */
+
+        @media (max-height: 700px) {
+
+            #tituloPokemon {
+
+                top: 3%;
+            }
+
+
+            #tituloPokemon .pokemon {
+
+                font-size: 31px;
+            }
+
+
+            #tituloPokemon .amarillo {
+
+                font-size: 34px;
+            }
+
+
+            #tituloPokemon p {
+
+                font-size: 11px;
+
+                margin-top: 7px;
+            }
+
+
+            #pikachuInicio {
+
+                top: 34%;
+
+                width: 175px;
+            }
+
+
+            #iniciar {
+
+                top: 62%;
+
+                font-size: 15px;
+
+                padding:
+                    11px 24px;
+            }
+
+
+            #aviso {
+
+                bottom: 3%;
+
+                font-size: 10px;
+            }
+
         }
 
     </style>
@@ -138,71 +428,112 @@
 <body>
 
 
+<!-- =========================
+     EMULADOR
+========================== -->
+
 <div id="game"></div>
 
 
+
+<!-- =========================
+     PORTADA
+========================== -->
+
 <div id="inicio">
 
-    <h1 id="titulo">
-        POKÉMON AMARILLO
-    </h1>
 
-    <div id="subtitulo">
-        EDICIÓN ESPECIAL PIKACHU
+    <div id="tituloPokemon">
+
+        <h1 class="pokemon">
+            POKÉMON
+        </h1>
+
+        <h1 class="amarillo">
+            AMARILLO
+        </h1>
+
+        <p>
+            EDICIÓN ESPECIAL PIKACHU
+        </p>
+
     </div>
 
+
+
+    <!-- PIKACHU -->
+
+    <img
+        id="pikachuInicio"
+        src="./pikachu.png"
+        alt="Pikachu"
+    >
+
+
+
+    <!-- BOTÓN -->
+
     <button id="iniciar">
+
         INICIAR JUEGO
+
     </button>
+
+
 
     <div id="estado"></div>
 
+
+
     <div id="aviso">
+
         Guarda la partida desde el menú del juego
         y espera unos segundos antes de cerrar.
+
     </div>
+
 
 </div>
 
 
+
 <script>
 
+
     /*
     =========================================
-    CONFIGURACIÓN POKÉMON AMARILLO
+    POKÉMON AMARILLO
     =========================================
     */
 
 
-    /*
-    EMULADOR
-    */
+    /* EMULADOR */
 
-    window.EJS_player = "#game";
-
-
-    /*
-    NÚCLEO mGBA
-
-    Aunque la ROM sea .gb,
-    utilizamos mGBA.
-    */
-
-    window.EJS_core = "mgba";
+    window.EJS_player =
+        "#game";
 
 
     /*
-    CONTROLES DE GAME BOY
+    mGBA
 
-    Evita controles L/R de Game Boy Advance.
+    La ROM es .gb
     */
 
-    window.EJS_controlScheme = "gb";
+    window.EJS_core =
+        "mgba";
 
 
     /*
-    NOMBRE DEL JUEGO
+    CONTROLES GAME BOY
+
+    Sin botones L/R de GBA.
     */
+
+    window.EJS_controlScheme =
+        "gb";
+
+
+    /* NOMBRE */
 
     window.EJS_gameName =
         "pokemon-amarillo";
@@ -210,19 +541,18 @@
 
     /*
     ID ÚNICO
-
-    Amarillo = 1001
-    Azul     = 1002
-    Verde    = 1003
-
-    NO CAMBIAR ESTE NÚMERO.
     */
 
-    window.EJS_gameID = 1001;
+    window.EJS_gameID =
+        1001;
 
 
     /*
-    ROM POKÉMON AMARILLO
+    ROM
+
+    Amarillo está en la raíz,
+    por eso roms también cuelga
+    directamente de la raíz.
     */
 
     window.EJS_gameUrl =
@@ -232,20 +562,20 @@
         ).href;
 
 
-    /*
-    ARCHIVOS EMULATORJS
-    */
+    /* EMULATORJS */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
     /*
-    EL EMULADOR ARRANCA
-    DESPUÉS DE PULSAR NUESTRO BOTÓN
+    Se inicia cuando cargamos
+    EmulatorJS después de pulsar
+    nuestro botón.
     */
 
-    window.EJS_startOnLoaded = true;
+    window.EJS_startOnLoaded =
+        true;
 
 
     /*
@@ -264,8 +594,9 @@
 
     window.EJS_defaultOptions = {
 
+
         /*
-        QUITAR MARCO SUPER GAME BOY
+        SIN BORDE SUPER GAME BOY
         */
 
         "mgba_sgb_borders":
@@ -273,10 +604,7 @@
 
 
         /*
-        FORZAR GAME BOY COLOR
-
-        Evita que Pokémon Amarillo
-        muestre el marco Super Game Boy.
+        GAME BOY COLOR
         */
 
         "mgba_gb_model":
@@ -284,8 +612,7 @@
 
 
         /*
-        GUARDADOS DEL EMULADOR
-        EN EL NAVEGADOR
+        GUARDADO EN NAVEGADOR
         */
 
         "save-state-location":
@@ -295,29 +622,46 @@
 
 
     /*
+    =========================================
     BOTONES DEL EMULADOR
+    =========================================
     */
 
     window.EJS_Buttons = {
 
+
         saveSavFiles: {
+
             visible: true
+
         },
+
 
         loadSavFiles: {
+
             visible: true
+
         },
+
 
         saveState: {
+
             visible: true
+
         },
+
 
         loadState: {
+
             visible: true
+
         },
 
+
         fullscreen: {
+
             visible: true
+
         }
 
     };
@@ -330,27 +674,43 @@
     */
 
     const boton =
-        document.getElementById("iniciar");
+        document.getElementById(
+            "iniciar"
+        );
+
 
     const estado =
-        document.getElementById("estado");
+        document.getElementById(
+            "estado"
+        );
+
 
     const pantallaInicio =
-        document.getElementById("inicio");
+        document.getElementById(
+            "inicio"
+        );
 
 
     /*
-    AL PULSAR INICIAR JUEGO
+    =========================================
+    AL PULSAR INICIAR
+    =========================================
     */
 
     boton.addEventListener(
+
         "click",
+
         function () {
 
-            boton.disabled = true;
+
+            boton.disabled =
+                true;
+
 
             boton.textContent =
                 "CARGANDO...";
+
 
             estado.textContent =
                 "Preparando Pokémon Amarillo...";
@@ -358,11 +718,12 @@
 
             /*
             CARGAMOS EMULATORJS
-            DESPUÉS DEL TOQUE
             */
 
             const script =
-                document.createElement("script");
+                document.createElement(
+                    "script"
+                );
 
 
             script.src =
@@ -370,41 +731,52 @@
 
 
             /*
-            CUANDO EL EMULADOR
-            SE HAYA CARGADO
+            CUANDO SE CARGUE
             */
 
             script.onload =
                 function () {
 
+
                     pantallaInicio.style.display =
                         "none";
+
 
                 };
 
 
             /*
-            SI HAY ERROR
+            ERROR
             */
 
             script.onerror =
                 function () {
 
-                    boton.disabled = false;
+
+                    boton.disabled =
+                        false;
+
 
                     boton.textContent =
                         "REINTENTAR";
 
+
                     estado.textContent =
                         "No se pudo cargar el emulador. Comprueba la conexión.";
+
 
                 };
 
 
-            document.body.appendChild(script);
+            document.body.appendChild(
+                script
+            );
+
 
         }
+
     );
+
 
 </script>
 
