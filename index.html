@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -11,66 +10,40 @@
                    maximum-scale=1.0,
                    user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Pokémon Amarillo</title>
-
-
-    <link rel="preload"
-          href="./roms/juego.gb"
-          as="fetch">
-
 
     <style>
 
         html,
         body {
-
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
-
             background: #000;
-
             overflow: hidden;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-
-        /* =========================
-           EMULADOR
-        ========================== */
 
         #game {
-
             width: 100%;
             height: 100%;
         }
 
 
         /* =========================
-           PANTALLA DE INICIO
+           PORTADA
         ========================== */
 
         #inicio {
-
             position: fixed;
-
             inset: 0;
-
             z-index: 9999;
-
             background: #000;
-
             text-align: center;
-
             overflow: hidden;
         }
 
@@ -80,35 +53,23 @@
         ========================== */
 
         #tituloPokemon {
-
             position: absolute;
-
             top: 5%;
-
             left: 0;
-
             width: 100%;
-
             text-align: center;
-
             pointer-events: none;
         }
 
 
-        /* POKÉMON */
-
         #tituloPokemon .pokemon {
-
             margin: 0;
 
             color: #ffffff;
 
             font-size: 40px;
-
             font-weight: 900;
-
             letter-spacing: 4px;
-
             line-height: 1;
 
             text-shadow:
@@ -117,20 +78,14 @@
         }
 
 
-        /* AMARILLO */
-
         #tituloPokemon .amarillo {
-
             margin: 8px 0 0 0;
 
             color: #ffdc00;
 
             font-size: 44px;
-
             font-weight: 900;
-
             letter-spacing: 3px;
-
             line-height: 1;
 
             text-shadow:
@@ -139,18 +94,13 @@
         }
 
 
-        /* EDICIÓN */
-
         #tituloPokemon p {
-
             margin-top: 12px;
 
             color: white;
 
             font-size: 14px;
-
             font-weight: bold;
-
             letter-spacing: 2px;
         }
 
@@ -160,11 +110,9 @@
         ========================== */
 
         #pikachuInicio {
-
             position: absolute;
 
-            top: 36%;
-
+            top: 39%;
             left: 50%;
 
             transform:
@@ -188,11 +136,9 @@
         ========================== */
 
         #iniciar {
-
             position: absolute;
 
             top: 64%;
-
             left: 50%;
 
             transform:
@@ -213,26 +159,20 @@
             padding:
                 14px 30px;
 
-            font-size:
-                18px;
+            font-size: 18px;
+            font-weight: 900;
 
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
+            cursor: pointer;
 
             box-shadow:
                 0 5px 12px
                 rgba(0,0,0,0.5);
 
-            white-space:
-                nowrap;
+            white-space: nowrap;
         }
 
 
         #iniciar:active {
-
             transform:
                 translateX(-50%)
                 scale(0.97);
@@ -240,9 +180,7 @@
 
 
         #iniciar:disabled {
-
             opacity: 0.7;
-
             cursor: default;
         }
 
@@ -252,11 +190,9 @@
         ========================== */
 
         #estado {
-
             position: absolute;
 
             top: 74%;
-
             left: 50%;
 
             transform:
@@ -273,88 +209,46 @@
 
 
         /* =========================
-           AVISO
-        ========================== */
-
-        #aviso {
-
-            position: absolute;
-
-            bottom: 6%;
-
-            left: 50%;
-
-            transform:
-                translateX(-50%);
-
-            width: 85%;
-
-            max-width: 320px;
-
-            color: #aaa;
-
-            font-size: 11px;
-
-            line-height: 1.4;
-        }
-
-
-        /* =========================
-           MÓVILES
+           MÓVIL
         ========================== */
 
         @media (max-width: 600px) {
 
             #tituloPokemon {
-
                 top: 5%;
             }
 
 
             #tituloPokemon .pokemon {
-
                 font-size: 36px;
-
                 letter-spacing: 3px;
             }
 
 
             #tituloPokemon .amarillo {
-
                 font-size: 39px;
-
                 letter-spacing: 2px;
             }
 
 
             #tituloPokemon p {
-
                 font-size: 13px;
-
                 margin-top: 10px;
             }
 
 
             #pikachuInicio {
-
-                top: 36%;
-
-                width: 200px;
-
+                top: 39%;
+                width: 205px;
                 max-width: 58vw;
             }
 
 
             #iniciar {
-
                 top: 64%;
-
                 min-width: 215px;
-
                 font-size: 17px;
-
-                padding:
-                    13px 28px;
+                padding: 13px 28px;
             }
 
         }
@@ -367,55 +261,36 @@
         @media (max-height: 700px) {
 
             #tituloPokemon {
-
                 top: 3%;
             }
 
 
             #tituloPokemon .pokemon {
-
                 font-size: 31px;
             }
 
 
             #tituloPokemon .amarillo {
-
                 font-size: 34px;
             }
 
 
             #tituloPokemon p {
-
                 font-size: 11px;
-
                 margin-top: 7px;
             }
 
 
             #pikachuInicio {
-
-                top: 34%;
-
-                width: 175px;
+                top: 37%;
+                width: 180px;
             }
 
 
             #iniciar {
-
-                top: 62%;
-
+                top: 61%;
                 font-size: 15px;
-
-                padding:
-                    11px 24px;
-            }
-
-
-            #aviso {
-
-                bottom: 3%;
-
-                font-size: 10px;
+                padding: 11px 24px;
             }
 
         }
@@ -433,7 +308,6 @@
 ========================== -->
 
 <div id="game"></div>
-
 
 
 <!-- =========================
@@ -460,7 +334,6 @@
     </div>
 
 
-
     <!-- PIKACHU -->
 
     <img
@@ -470,35 +343,20 @@
     >
 
 
-
     <!-- BOTÓN -->
 
     <button id="iniciar">
-
         INICIAR JUEGO
-
     </button>
-
 
 
     <div id="estado"></div>
 
 
-
-    <div id="aviso">
-
-        Guarda la partida desde el menú del juego
-        y espera unos segundos antes de cerrar.
-
-    </div>
-
-
 </div>
 
 
-
 <script>
-
 
     /*
     =========================================
@@ -507,16 +365,12 @@
     */
 
 
-    /* EMULADOR */
-
     window.EJS_player =
         "#game";
 
 
     /*
-    mGBA
-
-    La ROM es .gb
+    NÚCLEO mGBA
     */
 
     window.EJS_core =
@@ -525,15 +379,23 @@
 
     /*
     CONTROLES GAME BOY
-
-    Sin botones L/R de GBA.
     */
 
     window.EJS_controlScheme =
         "gb";
 
 
-    /* NOMBRE */
+    /*
+    INTERFAZ MÓVIL
+    */
+
+    window.EJS_browserMode =
+        "mobile";
+
+
+    /*
+    NOMBRE
+    */
 
     window.EJS_gameName =
         "pokemon-amarillo";
@@ -550,28 +412,25 @@
     /*
     ROM
 
-    Amarillo está en la raíz,
-    por eso roms también cuelga
-    directamente de la raíz.
+    Como Amarillo está en la raíz,
+    roms también está en la raíz.
     */
 
     window.EJS_gameUrl =
-        new URL(
-            "./roms/juego.gb",
-            window.location.href
-        ).href;
+        "./roms/juego.gb";
 
 
-    /* EMULATORJS */
+    /*
+    EMULATORJS
+    */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
 
     /*
-    Se inicia cuando cargamos
-    EmulatorJS después de pulsar
-    nuestro botón.
+    Arranca al cargar EmulatorJS
+    después de pulsar nuestro botón.
     */
 
     window.EJS_startOnLoaded =
@@ -579,7 +438,23 @@
 
 
     /*
-    GUARDADO PERIÓDICO
+    COLOR AMARILLO
+    */
+
+    window.EJS_color =
+        "#ffdc00";
+
+
+    /*
+    FONDO
+    */
+
+    window.EJS_backgroundColor =
+        "#000000";
+
+
+    /*
+    GUARDADO
     */
 
     window.EJS_fixedSaveInterval =
@@ -588,15 +463,14 @@
 
     /*
     =========================================
-    CONFIGURACIÓN mGBA
+    OPCIONES mGBA
     =========================================
     */
 
     window.EJS_defaultOptions = {
 
-
         /*
-        SIN BORDE SUPER GAME BOY
+        Sin marco Super Game Boy
         */
 
         "mgba_sgb_borders":
@@ -604,7 +478,7 @@
 
 
         /*
-        GAME BOY COLOR
+        Ejecutar como Game Boy Color
         */
 
         "mgba_gb_model":
@@ -612,7 +486,7 @@
 
 
         /*
-        GUARDADO EN NAVEGADOR
+        Guardados en navegador
         */
 
         "save-state-location":
@@ -629,39 +503,24 @@
 
     window.EJS_Buttons = {
 
-
         saveSavFiles: {
-
             visible: true
-
         },
-
 
         loadSavFiles: {
-
             visible: true
-
         },
-
 
         saveState: {
-
             visible: true
-
         },
-
 
         loadState: {
-
             visible: true
-
         },
 
-
         fullscreen: {
-
             visible: true
-
         }
 
     };
@@ -669,7 +528,7 @@
 
     /*
     =========================================
-    PANTALLA INICIAL
+    PORTADA
     =========================================
     */
 
@@ -717,7 +576,7 @@
 
 
             /*
-            CARGAMOS EMULATORJS
+            CARGAR EMULATORJS
             */
 
             const script =
@@ -731,7 +590,7 @@
 
 
             /*
-            CUANDO SE CARGUE
+            CUANDO CARGUE
             */
 
             script.onload =
@@ -746,7 +605,7 @@
 
 
             /*
-            ERROR
+            SI HAY ERROR
             */
 
             script.onerror =
