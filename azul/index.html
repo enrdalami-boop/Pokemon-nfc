@@ -34,15 +34,28 @@
 
 
         /* =========================
+           PORTADA
+        ========================== */
+
+        #inicio {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            text-align: center;
+            overflow: hidden;
+        }
+
+
+        /* =========================
            TÍTULO
         ========================== */
 
         #tituloPokemon {
-            position: fixed;
-            top: 6%;
+            position: absolute;
+            top: 5%;
             left: 0;
             width: 100%;
-            z-index: 9999;
             text-align: center;
             pointer-events: none;
         }
@@ -50,9 +63,7 @@
 
         #tituloPokemon .pokemon {
             margin: 0;
-
             color: #ffffff;
-
             font-size: 40px;
             font-weight: 900;
             letter-spacing: 4px;
@@ -66,9 +77,7 @@
 
         #tituloPokemon .azul {
             margin: 8px 0 0 0;
-
             color: #2196f3;
-
             font-size: 44px;
             font-weight: 900;
             letter-spacing: 3px;
@@ -82,9 +91,7 @@
 
         #tituloPokemon p {
             margin-top: 12px;
-
             color: white;
-
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -96,27 +103,98 @@
         ========================== */
 
         #blastoiseInicio {
+            position: absolute;
 
-            position: fixed;
-
-            top: 36%;
+            top: 39%;
             left: 50%;
 
             transform:
                 translate(-50%, -50%);
 
-            width: 230px;
-
-            max-width: 60vw;
-
+            width: 220px;
+            max-width: 58vw;
             height: auto;
-
-            z-index: 9998;
 
             pointer-events: none;
 
             image-rendering: pixelated;
             image-rendering: crisp-edges;
+        }
+
+
+        /* =========================
+           BOTÓN INICIAR
+        ========================== */
+
+        #iniciar {
+            position: absolute;
+
+            top: 67%;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            min-width: 220px;
+
+            background:
+                #2196f3;
+
+            color:
+                white;
+
+            border: none;
+
+            border-radius: 30px;
+
+            padding:
+                14px 30px;
+
+            font-size: 18px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 12px rgba(0,0,0,0.5);
+
+            white-space: nowrap;
+        }
+
+
+        #iniciar:active {
+            transform:
+                translateX(-50%)
+                scale(0.97);
+        }
+
+
+        #iniciar:disabled {
+            opacity: 0.7;
+            cursor: default;
+        }
+
+
+        /* =========================
+           ESTADO
+        ========================== */
+
+        #estado {
+            position: absolute;
+
+            top: 77%;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 90%;
+
+            color: white;
+
+            font-size: 13px;
+
+            min-height: 18px;
         }
 
 
@@ -150,12 +228,22 @@
 
 
             #blastoiseInicio {
+                top: 39%;
+                width: 205px;
+                max-width: 58vw;
+            }
 
-                top: 36%;
 
-                width: 220px;
+            #iniciar {
+                top: 67%;
+                min-width: 215px;
+                font-size: 17px;
+                padding: 13px 28px;
+            }
 
-                max-width: 60vw;
+
+            #estado {
+                top: 77%;
             }
 
         }
@@ -168,7 +256,7 @@
         @media (max-height: 700px) {
 
             #tituloPokemon {
-                top: 4%;
+                top: 3%;
             }
 
 
@@ -184,15 +272,25 @@
 
             #tituloPokemon p {
                 font-size: 11px;
-                margin-top: 8px;
+                margin-top: 7px;
             }
 
 
             #blastoiseInicio {
+                top: 37%;
+                width: 180px;
+            }
 
-                top: 35%;
 
-                width: 195px;
+            #iniciar {
+                top: 64%;
+                font-size: 15px;
+                padding: 11px 24px;
+            }
+
+
+            #estado {
+                top: 74%;
             }
 
         }
@@ -205,78 +303,136 @@
 <body>
 
 
-<!-- PORTADA -->
-
-<div id="tituloPokemon">
-
-    <h1 class="pokemon">
-        POKÉMON
-    </h1>
-
-    <h1 class="azul">
-        AZUL
-    </h1>
-
-    <p>
-        EDICIÓN AZUL
-    </p>
-
-</div>
-
-
-<!-- BLASTOISE -->
-
-<img
-    id="blastoiseInicio"
-    src="./blastoise.png"
-    alt="Blastoise"
->
-
-
 <!-- EMULADOR -->
 
 <div id="game"></div>
 
 
+<!-- PORTADA -->
+
+<div id="inicio">
+
+
+    <div id="tituloPokemon">
+
+        <h1 class="pokemon">
+            POKÉMON
+        </h1>
+
+        <h1 class="azul">
+            AZUL
+        </h1>
+
+        <p>
+            EDICIÓN AZUL
+        </p>
+
+    </div>
+
+
+    <!-- BLASTOISE -->
+
+    <img
+        id="blastoiseInicio"
+        src="./blastoise.png"
+        alt="Blastoise"
+    >
+
+
+    <!-- BOTÓN -->
+
+    <button id="iniciar">
+        INICIAR JUEGO
+    </button>
+
+
+    <div id="estado"></div>
+
+
+</div>
+
+
 <script>
 
-    window.EJS_player = "#game";
+    /*
+    =========================================
+    POKÉMON AZUL
+    =========================================
+    */
 
-    window.EJS_core = "gba";
 
-    window.EJS_controlScheme = "gba";
+    window.EJS_player =
+        "#game";
 
-    window.EJS_browserMode = "mobile";
+
+    /* GAME BOY ADVANCE */
+
+    window.EJS_core =
+        "gba";
+
+
+    /* CONTROLES GBA */
+
+    window.EJS_controlScheme =
+        "gba";
+
+
+    /* INTERFAZ MÓVIL */
+
+    window.EJS_browserMode =
+        "mobile";
+
+
+    /* NOMBRE */
 
     window.EJS_gameName =
         "pokemon-azul";
 
+
+    /* ID */
+
     window.EJS_gameID =
         1002;
+
+
+    /* ROM */
 
     window.EJS_gameUrl =
         "./roms/juego.gba";
 
+
+    /* EMULATORJS */
+
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
+
+    /*
+    Arranca al cargar EmulatorJS
+    después de pulsar el botón.
+    */
+
     window.EJS_startOnLoaded =
-        false;
+        true;
 
-    window.EJS_startButtonName =
-        "INICIAR JUEGO";
 
-    window.EJS_alignStartButton =
-        "center";
+    /* COLOR */
 
     window.EJS_color =
         "#2196f3";
 
+
+    /* FONDO */
+
     window.EJS_backgroundColor =
         "#000000";
 
+
+    /* GUARDADO */
+
     window.EJS_fixedSaveInterval =
         7000;
+
 
     window.EJS_defaultOptions = {
 
@@ -286,37 +442,106 @@
     };
 
 
-    window.EJS_onGameStart =
+    /*
+    =========================================
+    PORTADA
+    =========================================
+    */
+
+    const boton =
+        document.getElementById(
+            "iniciar"
+        );
+
+
+    const estado =
+        document.getElementById(
+            "estado"
+        );
+
+
+    const pantallaInicio =
+        document.getElementById(
+            "inicio"
+        );
+
+
+    /*
+    =========================================
+    AL PULSAR INICIAR
+    =========================================
+    */
+
+    boton.addEventListener(
+
+        "click",
+
         function () {
 
-            const titulo =
-                document.getElementById(
-                    "tituloPokemon"
+
+            boton.disabled =
+                true;
+
+
+            boton.textContent =
+                "CARGANDO...";
+
+
+            estado.textContent =
+                "Preparando Pokémon Azul...";
+
+
+            const script =
+                document.createElement(
+                    "script"
                 );
 
-            const blastoise =
-                document.getElementById(
-                    "blastoiseInicio"
-                );
+
+            script.src =
+                "https://cdn.emulatorjs.org/4.2.3/data/loader.js";
 
 
-            if (titulo) {
-                titulo.style.display =
-                    "none";
-            }
+            script.onload =
+                function () {
 
 
-            if (blastoise) {
-                blastoise.style.display =
-                    "none";
-            }
+                    pantallaInicio.style.display =
+                        "none";
 
-        };
+
+                };
+
+
+            script.onerror =
+                function () {
+
+
+                    boton.disabled =
+                        false;
+
+
+                    boton.textContent =
+                        "REINTENTAR";
+
+
+                    estado.textContent =
+                        "No se pudo cargar el emulador. Comprueba la conexión.";
+
+
+                };
+
+
+            document.body.appendChild(
+                script
+            );
+
+
+        }
+
+    );
+
 
 </script>
-
-
-<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
 
 
 </body>
