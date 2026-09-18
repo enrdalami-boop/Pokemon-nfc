@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -10,55 +11,76 @@
                    maximum-scale=1.0,
                    user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
 
     <title>Pokémon Verde</title>
+
 
     <style>
 
         html,
         body {
+
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
+
             background: #000;
+
             overflow: hidden;
         }
 
 
         #game {
+
             width: 100%;
             height: 100%;
         }
 
 
         /* =========================
-           TÍTULO
+           PORTADA
         ========================== */
 
         #tituloPokemon {
+
             position: fixed;
+
             top: 6%;
             left: 0;
+
             width: 100%;
+
             z-index: 9999;
+
             text-align: center;
+
             pointer-events: none;
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
 
 
         /* POKÉMON */
 
         #tituloPokemon .pokemon {
+
             margin: 0;
 
             color: #ffffff;
 
             font-size: 40px;
+
             font-weight: 900;
+
             letter-spacing: 4px;
+
             line-height: 1;
 
             text-shadow:
@@ -70,13 +92,17 @@
         /* VERDE */
 
         #tituloPokemon .verde {
+
             margin: 8px 0 0 0;
 
             color: #39b54a;
 
             font-size: 44px;
+
             font-weight: 900;
+
             letter-spacing: 3px;
+
             line-height: 1;
 
             text-shadow:
@@ -88,12 +114,15 @@
         /* EDICIÓN VERDE */
 
         #tituloPokemon p {
+
             margin-top: 12px;
 
             color: white;
 
             font-size: 14px;
+
             font-weight: bold;
+
             letter-spacing: 2px;
         }
 
@@ -103,15 +132,19 @@
         ========================== */
 
         #venusaurInicio {
+
             position: fixed;
 
             top: 25%;
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
             width: 220px;
+
             max-width: 58vw;
+
             height: auto;
 
             z-index: 9998;
@@ -130,31 +163,41 @@
         @media (max-width: 600px) {
 
             #tituloPokemon {
+
                 top: 6%;
             }
 
 
             #tituloPokemon .pokemon {
+
                 font-size: 36px;
+
                 letter-spacing: 3px;
             }
 
 
             #tituloPokemon .verde {
+
                 font-size: 39px;
+
                 letter-spacing: 2px;
             }
 
 
             #tituloPokemon p {
+
                 font-size: 13px;
+
                 margin-top: 10px;
             }
 
 
             #venusaurInicio {
+
                 top: 25%;
+
                 width: 205px;
+
                 max-width: 58vw;
             }
 
@@ -162,34 +205,41 @@
 
 
         /* =========================
-           PANTALLAS BAJAS
+           PANTALLAS PEQUEÑAS
         ========================== */
 
         @media (max-height: 700px) {
 
             #tituloPokemon {
+
                 top: 4%;
             }
 
 
             #tituloPokemon .pokemon {
+
                 font-size: 31px;
             }
 
 
             #tituloPokemon .verde {
+
                 font-size: 34px;
             }
 
 
             #tituloPokemon p {
+
                 font-size: 11px;
+
                 margin-top: 8px;
             }
 
 
             #venusaurInicio {
+
                 top: 24%;
+
                 width: 175px;
             }
 
@@ -198,6 +248,7 @@
     </style>
 
 </head>
+
 
 <body>
 
@@ -223,6 +274,7 @@
 </div>
 
 
+
 <!-- =========================
      VENUSAUR
 ========================== -->
@@ -234,6 +286,7 @@
 >
 
 
+
 <!-- =========================
      EMULADOR
 ========================== -->
@@ -241,54 +294,145 @@
 <div id="game"></div>
 
 
+
 <script>
 
-    window.EJS_player = "#game";
 
-    window.EJS_core = "gba";
+    /* =========================
+       EMULATORJS
+    ========================== */
 
-    window.EJS_gameName = "pokemon-verde";
+    window.EJS_player =
+        "#game";
 
-    window.EJS_gameID = 1003;
 
-    window.EJS_gameUrl = "./roms/juego.gba";
+    /* Game Boy Advance / mGBA */
+
+    window.EJS_core =
+        "gba";
+
+
+    /* Nombre del juego */
+
+    window.EJS_gameName =
+        "pokemon-verde";
+
+
+    /*
+       ID NUEVO:
+       evita reutilizar datos
+       anteriores del juego.
+    */
+
+    window.EJS_gameID =
+        2003;
+
+
+    /* Archivo del juego */
+
+    window.EJS_gameUrl =
+        "./roms/juego.gba";
+
+
+    /* EmulatorJS 4.2.3 */
 
     window.EJS_pathtodata =
         "https://cdn.emulatorjs.org/4.2.3/data/";
 
-    window.EJS_startOnLoaded = false;
+
+    /* =========================
+       IMPORTANTE:
+       NO reutilizar ajustes
+       anteriores del emulador
+    ========================== */
+
+    window.EJS_disableLocalStorage =
+        true;
+
+
+    /* =========================
+       AJUSTES DE VELOCIDAD
+    ========================== */
+
+    window.EJS_defaultOptions = {
+
+        "save-state-location":
+            "browser",
+
+        "slowMotion":
+            "disabled",
+
+        "fastForward":
+            "disabled",
+
+        "shader":
+            "disabled"
+
+    };
+
+
+    /*
+       Ocultamos los ajustes
+       que podrían modificar
+       accidentalmente la velocidad.
+    */
+
+    window.EJS_hideSettings = [
+
+        "slowMotion",
+
+        "sm-ratio",
+
+        "fastForward",
+
+        "ff-ratio",
+
+        "shader"
+
+    ];
+
+
+    /* =========================
+       PANTALLA INICIAL
+    ========================== */
+
+    window.EJS_startOnLoaded =
+        false;
+
 
     window.EJS_startButtonName =
         "INICIAR JUEGO";
 
+
     window.EJS_alignStartButton =
         "center";
+
+
+    /* Color verde */
 
     window.EJS_color =
         "#39b54a";
 
+
+    /* Fondo */
+
     window.EJS_backgroundColor =
         "#000000";
 
-    window.EJS_fixedSaveInterval =
-        7000;
-
-    window.EJS_defaultOptions = {
-        "save-state-location": "browser"
-    };
-
 
     /* =========================
-       AL INICIAR EL JUEGO
+       AL INICIAR
     ========================== */
 
     window.EJS_onGameStart =
         function () {
 
+
             const titulo =
                 document.getElementById(
                     "tituloPokemon"
                 );
+
 
             const venusaur =
                 document.getElementById(
@@ -297,20 +441,29 @@
 
 
             if (titulo) {
-                titulo.style.display = "none";
+
+                titulo.style.display =
+                    "none";
+
             }
 
 
             if (venusaur) {
-                venusaur.style.display = "none";
+
+                venusaur.style.display =
+                    "none";
+
             }
 
         };
 
+
 </script>
 
 
-<script src="https://cdn.emulatorjs.org/4.2.3/data/loader.js"></script>
+<script
+    src="https://cdn.emulatorjs.org/4.2.3/data/loader.js">
+</script>
 
 
 </body>
